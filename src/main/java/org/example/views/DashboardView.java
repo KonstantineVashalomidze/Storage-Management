@@ -1,5 +1,12 @@
 package org.example.views;
 
+import org.example.controllers.InventoryController;
+import org.example.controllers.ReportController;
+import org.example.controllers.StorageFacilityController;
+import org.example.services.InventoryService;
+import org.example.services.ReportService;
+import org.example.services.StorageFacilityService;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -20,8 +27,8 @@ public class DashboardView extends JFrame {
         setVisible(true);
 
         // Initialize inventoryTable (sample initialization)
-        Object[][] data = { /* sample data */ };
-        Object[] columnNames = { /* sample column names */ };
+        Object[][] data = { /* sample data */};
+        Object[] columnNames = { /* sample column names */};
         initializeInventoryTable(data, columnNames);
     }
 
@@ -50,8 +57,11 @@ public class DashboardView extends JFrame {
             // Example: Open InventoryView or trigger inventory-related actions
             System.out.println("Inventory Button Clicked");
 
-            EventQueue.invokeLater(() ->
-                    new InventoryView().setVisible(true));
+            EventQueue.invokeLater(() -> {
+                var inventoryView = new InventoryView();
+                var inventoryService = new InventoryService();
+                var inventoryController = new InventoryController(inventoryView, inventoryService);
+            });
 
             this.dispose();
         });
@@ -60,8 +70,12 @@ public class DashboardView extends JFrame {
             // Handle Storage Facilities Button Click
             // Example: Open StorageFacilityView or trigger storage-related actions
             System.out.println("Storage Facilities Button Clicked");
-            EventQueue.invokeLater(() ->
-                    new com.horozelektrik.storage.views.StorageFacilityView().setVisible(true));
+            EventQueue.invokeLater(() -> {
+                var storageFacilityView = new StorageFacilityView();
+                storageFacilityView.setVisible(true);
+                var storageFacilityService = new StorageFacilityService();
+                var storageFacilityController = new StorageFacilityController(storageFacilityService, storageFacilityView);
+            });
             this.dispose();
         });
 
@@ -69,7 +83,12 @@ public class DashboardView extends JFrame {
             // Handle Generate Report Button Click
             // Example: Generate reports or open ReportView
             System.out.println("Generate Report Button Clicked");
-            EventQueue.invokeLater(() -> new ReportView().setVisible(true));
+            EventQueue.invokeLater(() -> {
+                var reportView = new ReportView();
+                reportView.setVisible(true);
+                var reportService = new ReportService();
+                var reportController = new ReportController(reportService);
+            });
             this.dispose();
         });
 

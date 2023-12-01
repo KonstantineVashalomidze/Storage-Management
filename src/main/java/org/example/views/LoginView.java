@@ -1,18 +1,21 @@
 package org.example.views;
 
+import org.example.controllers.DashboardController;
+import org.example.controllers.RegistrationController;
 import org.example.models.User;
 import org.example.services.AuthenticationService;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class LoginView extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
 
     private AuthenticationService authService;
+
+    private JButton loginButton, registrationButton;
 
     public LoginView(AuthenticationService authService) {
         this.authService = authService;
@@ -22,7 +25,7 @@ public class LoginView extends JFrame {
         setPreferredSize(new Dimension(400, 250));
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(3, 2, 10, 10));
+        panel.setLayout(new GridLayout(4, 2, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         JLabel usernameLabel = new JLabel("Username:");
@@ -37,29 +40,7 @@ public class LoginView extends JFrame {
         passwordField = new JPasswordField();
         panel.add(passwordField);
 
-        JButton loginButton = new JButton("Login");
-        loginButton.addActionListener(e -> {
-            // Handle login button click event
-            String username = usernameField.getText();
-            String password = new String(passwordField.getPassword());
-
-            User authenticatedUser = authService.authenticate(username, password);
-
-            if (authenticatedUser != null) {
-                // Authentication successful
-                JOptionPane.showMessageDialog(this, "Login Successful!");
-                // Add logic to proceed after successful login (e.g., open main dashboard)
-                new DashboardView().setVisible(true);
-                this.dispose();
-            } else {
-                // Authentication failed
-                JOptionPane.showMessageDialog(this, "Invalid username or password. Please try again.");
-                // clear the password field
-                passwordField.setText("");
-            }
-
-
-        });
+        loginButton = new JButton("Login");
         panel.add(loginButton);
 
         JButton cancelButton = new JButton("Clear");
@@ -70,26 +51,49 @@ public class LoginView extends JFrame {
         });
         panel.add(cancelButton);
 
+        registrationButton = createRegisterButton();
+        panel.add(registrationButton);
+
+        JButton exitButton = createExitButton();
+        panel.add(exitButton);
+
+
         add(panel);
         pack();
         setLocationRelativeTo(null); // Center the JFrame on screen
         setVisible(true);
     }
 
+    // A method to create button for exit from the window
+    private JButton createExitButton() {
+        JButton exitButton = new JButton("Exit");
+        exitButton.addActionListener(e -> dispose());
+        return exitButton;
+    }
+
+    // Add a method to create a button for navigating to the LoginView
+    private JButton createRegisterButton() {
+        return new JButton("Back to Registration");
+    }
+
+
+    public JButton getRegistrationButton() {
+        return registrationButton;
+    }
 
     public JButton getLoginButton() {
         // Returns the login button
-        return (JButton) getContentPane().getComponent(4);
+        return loginButton;
     }
 
-    public String getUsername() {
-        // Returns the text entered in the username field
-        return usernameField.getText();
+    public JTextField getUsername() {
+        // Returns the text entered the username field
+        return usernameField;
     }
 
-    public String getPassword() {
-        // Returns the text entered in the password field
-        return new String(passwordField.getPassword());
+    public JPasswordField getPassword() {
+        // Returns the text entered the password field
+        return passwordField;
     }
 
 }

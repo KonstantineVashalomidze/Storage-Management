@@ -1,10 +1,11 @@
-package com.horozelektrik.storage.views;
+package org.example.views;
 
 import org.example.models.StorageFacility;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
@@ -56,6 +57,9 @@ public class StorageFacilityView extends JFrame {
         add(mainPanel);
         setVisible(true);
     }
+
+
+
 
     // Sample method to update facility details in the table
     public void updateFacilityDetails(Object[][] data, String[] columns) {

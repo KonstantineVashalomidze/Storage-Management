@@ -22,4 +22,23 @@ public class AuthenticationService {
             return null;
         }
     }
+
+    public boolean registerUser(User newUser) {
+        // Check if the user already exists in the database
+        if (databaseUtil.getUserByUsername(newUser.getUsername()) != null) {
+            // User already exists, registration failed
+            return false;
+        } else {
+            // User does not exist, proceed with registration
+            boolean registrationSuccessful = databaseUtil.addUser(newUser);
+
+            if (registrationSuccessful) {
+                // Registration successful
+                return true;
+            } else {
+                // Registration failed due to database error
+                return false;
+            }
+        }
+    }
 }

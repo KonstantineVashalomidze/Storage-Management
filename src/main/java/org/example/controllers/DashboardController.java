@@ -4,6 +4,7 @@ import org.example.models.User;
 import org.example.services.InventoryService;
 import org.example.views.DashboardView;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,6 +17,7 @@ public class DashboardController {
     public DashboardController(User currentUser) {
         this.currentUser = currentUser;
         this.dashboardView = new DashboardView();
+        this.dashboardView.setVisible(true);
         this.initializeView();
         this.attachEventListeners();
         this.inventoryService = new InventoryService(); // Instantiate the service
@@ -26,7 +28,7 @@ public class DashboardController {
 
         // Set up labels
         dashboardView.setHeaderLabel("Welcome, " + currentUser.getUsername());
-        dashboardView.setStatusLabel("Logged in as: " + currentUser.getRole());
+//        dashboardView.setStatusLabel("Logged in as: " + currentUser.getRole());
 
         // Set up buttons
         dashboardView.getRefreshButton().setText("Refresh");

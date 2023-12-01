@@ -47,6 +47,7 @@ public class InventoryController {
 
             // Refresh inventory display after addition
             loadInventoryData();
+
         }
 
         public void onAddItem() {

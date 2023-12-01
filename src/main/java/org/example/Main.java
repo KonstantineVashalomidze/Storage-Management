@@ -1,8 +1,10 @@
 package org.example;
 
+
+import org.example.controllers.RegistrationController;
 import org.example.services.AuthenticationService;
 import org.example.util.DatabaseUtil;
-import org.example.views.LoginView;
+import org.example.views.RegistrationView;
 
 import java.awt.*;
 
@@ -10,8 +12,13 @@ public class Main
 {
     public static void main(String[] args)
     {
-        EventQueue.invokeLater(() ->
-                new LoginView(new AuthenticationService(new DatabaseUtil())).setVisible(true));
+        EventQueue.invokeLater(() -> {
+            var registrationView = new RegistrationView();
+            var authService = new AuthenticationService(DatabaseUtil.getInstance());
+            registrationView.setVisible(true);
+            var registrationController = new RegistrationController(registrationView, authService);
+
+        });
     }
 }
 

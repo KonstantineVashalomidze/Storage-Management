@@ -1,8 +1,8 @@
 package org.example.controllers;
 
-import com.horozelektrik.storage.views.StorageFacilityView;
 import org.example.models.StorageFacility;
 import org.example.services.StorageFacilityService;
+import org.example.views.StorageFacilityView;
 
 import java.util.List;
 

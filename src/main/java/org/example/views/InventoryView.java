@@ -41,6 +41,7 @@ public class InventoryView extends JFrame {
 
 
 
+
     private void initializeUI() {
         setTitle("Inventory Management");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,6 +74,7 @@ public class InventoryView extends JFrame {
     public void addAddItemListener(InventoryController.AddItemListener listener) {
         this.addItemListener = listener;
         addButton.addActionListener(e -> {
+            System.out.println("mevedi");
             if (addItemListener != null) {
                 addItemListener.onAddItem();
             }

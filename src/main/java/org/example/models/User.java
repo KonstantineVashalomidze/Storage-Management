@@ -14,9 +14,19 @@ public class User {
         this.name = name;
     }
 
+    public String getUserEmail() {
+        return email;
+    }
+    public String getUserId() {
+        return userId;
+    }
 
     public String getUsername() {
         return username;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getRole() {

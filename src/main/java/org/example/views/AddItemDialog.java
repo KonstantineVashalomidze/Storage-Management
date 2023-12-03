@@ -1,9 +1,10 @@
 package org.example.views;
 
+import org.example.models.Item;
+import org.example.util.DatabaseUtil;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AddItemDialog extends JDialog {
     private JLabel itemNameLabel;
@@ -16,8 +17,6 @@ public class AddItemDialog extends JDialog {
     private JTextField priceTextField;
     private JButton addButton;
     private JButton cancelButton;
-
-
 
     public AddItemDialog(JFrame parent) {
         super(parent, "Add New Item", true);
@@ -50,18 +49,17 @@ public class AddItemDialog extends JDialog {
         panel.add(cancelButton);
 
         addButton.addActionListener(e -> {
-            // Process adding item functionality
-            // Retrieve values from text fields and create a new item
-            // Example:
+            // Retrieve values from text fields
             String itemName = itemNameTextField.getText();
             int quantity = Integer.parseInt(quantityTextField.getText());
             String description = descriptionTextField.getText();
             double price = Double.parseDouble(priceTextField.getText());
 
-            // Create a new item using the retrieved values (use your Item class constructor)
-            // Item newItem = new Item(itemName, quantity, description, price);
+            // Create a new item using the retrieved values
+            Item newItem = new Item(null, itemName, quantity, description, price);
 
-            // Perform the necessary action with the new item (save to database, update UI, etc.)
+            // Perform necessary actions with the new item (e.g., save to database or update UI)
+            DatabaseUtil.getInstance().addItemToDatabase(newItem);
 
             // Close the dialog
             dispose();
@@ -75,4 +73,5 @@ public class AddItemDialog extends JDialog {
         getContentPane().add(panel, BorderLayout.CENTER);
         setVisible(true);
     }
+
 }

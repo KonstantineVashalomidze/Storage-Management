@@ -15,9 +15,7 @@ public class Main
         EventQueue.invokeLater(() -> {
             var registrationView = new RegistrationView();
             var authService = new AuthenticationService(DatabaseUtil.getInstance());
-            registrationView.setVisible(true);
             var registrationController = new RegistrationController(registrationView, authService);
-
         });
     }
 }

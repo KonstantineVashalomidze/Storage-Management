@@ -4,8 +4,11 @@ package org.example.controllers;
 
 import org.example.models.Item;
 import org.example.services.InventoryService;
+import org.example.views.AddItemDialog;
 import org.example.views.InventoryView;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -39,12 +42,6 @@ public class InventoryController {
             implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Get data from the view
-            Item newItem = inventoryView.getNewItemDetails();
-
-            // Add the item via the service
-            inventoryService.addItem(newItem);
-
             // Refresh inventory display after addition
             loadInventoryData();
 
@@ -54,7 +51,11 @@ public class InventoryController {
             // This method could be used for additional actions or handling after adding an item
             // For example:
             // Show a success message or perform another action related to adding an item
-            System.out.println("Item added successfully!");
+            EventQueue.invokeLater(() -> {
+                AddItemDialog addItemDialog = new AddItemDialog(inventoryView);
+                // Show success message using a JOptionPane dialog
+                JOptionPane.showMessageDialog(addItemDialog, "Item added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            });
         }
     }
 
@@ -86,12 +87,6 @@ public class InventoryController {
     public class UpdateItemListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Get updated item details from the view
-            Item updatedItem = inventoryView.getUpdatedItemDetails();
-
-            // Update the item details via the service
-            inventoryService.updateItem(updatedItem);
-
             // Refresh inventory display after update
             loadInventoryData();
         }

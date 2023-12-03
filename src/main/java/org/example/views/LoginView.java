@@ -13,12 +13,9 @@ public class LoginView extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
 
-    private AuthenticationService authService;
-
     private JButton loginButton, registrationButton;
 
-    public LoginView(AuthenticationService authService) {
-        this.authService = authService;
+    public LoginView() {
 
         setTitle("Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

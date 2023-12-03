@@ -1,11 +1,7 @@
 package org.example.views;
 
 import org.example.controllers.InventoryController;
-import org.example.controllers.ReportController;
-import org.example.controllers.StorageFacilityController;
 import org.example.services.InventoryService;
-import org.example.services.ReportService;
-import org.example.services.StorageFacilityService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +12,9 @@ public class DashboardView extends JFrame {
     private JLabel titleLabel;
     private JLabel statusLabel;
     private JTable inventoryTable; // Declaration of the inventory table
+
+    private InventoryController inventoryController;
+
 
     public DashboardView() {
         setTitle("Horoz Elektrik - Dashboard");
@@ -42,13 +41,9 @@ public class DashboardView extends JFrame {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
 
         JButton inventoryBtn = new JButton("Inventory");
-        JButton storageBtn = new JButton("Storage Facilities");
-        JButton reportBtn = new JButton("Generate Report");
         JButton settingsBtn = new JButton("Settings");
 
         inventoryBtn.setPreferredSize(new Dimension(200, 100)); // Set button sizes
-        storageBtn.setPreferredSize(new Dimension(200, 100));
-        reportBtn.setPreferredSize(new Dimension(200, 100));
         settingsBtn.setPreferredSize(new Dimension(200, 100));
 
         // Add action listeners for buttons here
@@ -60,35 +55,9 @@ public class DashboardView extends JFrame {
             EventQueue.invokeLater(() -> {
                 var inventoryView = new InventoryView();
                 var inventoryService = new InventoryService();
-                var inventoryController = new InventoryController(inventoryView, inventoryService);
+                inventoryController = new InventoryController(inventoryView, inventoryService);
             });
 
-            this.dispose();
-        });
-
-        storageBtn.addActionListener(e -> {
-            // Handle Storage Facilities Button Click
-            // Example: Open StorageFacilityView or trigger storage-related actions
-            System.out.println("Storage Facilities Button Clicked");
-            EventQueue.invokeLater(() -> {
-                var storageFacilityView = new StorageFacilityView();
-                storageFacilityView.setVisible(true);
-                var storageFacilityService = new StorageFacilityService();
-                var storageFacilityController = new StorageFacilityController(storageFacilityService, storageFacilityView);
-            });
-            this.dispose();
-        });
-
-        reportBtn.addActionListener(e -> {
-            // Handle Generate Report Button Click
-            // Example: Generate reports or open ReportView
-            System.out.println("Generate Report Button Clicked");
-            EventQueue.invokeLater(() -> {
-                var reportView = new ReportView();
-                reportView.setVisible(true);
-                var reportService = new ReportService();
-                var reportController = new ReportController(reportService);
-            });
             this.dispose();
         });
 
@@ -100,8 +69,6 @@ public class DashboardView extends JFrame {
 
         topPanel.add(titleLabel);
         centerPanel.add(inventoryBtn);
-        centerPanel.add(storageBtn);
-        centerPanel.add(reportBtn);
         centerPanel.add(settingsBtn);
 
         mainPanel.add(topPanel, BorderLayout.NORTH);

@@ -21,18 +21,12 @@ public class InventoryView extends JFrame {
     private final String[] columnHeaders = {"Item ID", "Item Name", "Quantity", "Description", "Price"};
 
     // Create table for inventory display
-    private String[][] rowData = {{"ID001", "Switch", "100", "Standard light switch", "90.9"},
-                            {"ID002", "Socket", "80", "Universal socket outlet", "80.77"}};
+    private String[][] rowData = new String[][] {  };
 
     // Listener instances for buttons
     private InventoryController.AddItemListener addItemListener;
     private InventoryController.RemoveItemListener removeItemListener;
     private InventoryController.UpdateItemListener updateItemListener;
-
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> new InventoryView().setVisible(true));
-    }
 
 
     public InventoryView() {
@@ -74,7 +68,6 @@ public class InventoryView extends JFrame {
     public void addAddItemListener(InventoryController.AddItemListener listener) {
         this.addItemListener = listener;
         addButton.addActionListener(e -> {
-            System.out.println("mevedi");
             if (addItemListener != null) {
                 addItemListener.onAddItem();
             }
@@ -98,24 +91,18 @@ public class InventoryView extends JFrame {
 
     public void displayItems(List<Item> items) {
         // Convert list of items to table data format
-        String[][] rowData = new String[items.size()][4];
+        String[][] rowData = new String[items.size()][5];
         for (int i = 0; i < items.size(); i++) {
             Item item = items.get(i);
             rowData[i] = new String[]{
                     item.getItemId(),
                     item.getItemName(),
                     String.valueOf(item.getQuantity()),
-                    item.getDescription()
+                    item.getDescription(),
+                    String.valueOf(item.getPrice())
             };
         }
         inventoryTable.setModel(new DefaultTableModel(rowData, columnHeaders));
-    }
-
-    public Item getNewItemDetails() {
-        // Fetch new item details from UI inputs and return as Item object
-        // Implement based on UI input fields for new item creation
-        // Example: return new Item(itemId, itemName, quantity, description);
-        return null;
     }
 
     public Item getSelectedInventoryItem() {
@@ -137,10 +124,4 @@ public class InventoryView extends JFrame {
         }
     }
 
-    public Item getUpdatedItemDetails() {
-        // Fetch updated item details from UI inputs and return as Item object
-        // Implement based on UI input fields for item update
-        // Example: return updated Item(itemId, itemName, quantity, description);
-        return null;
-    }
 }

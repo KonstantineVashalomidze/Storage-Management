@@ -50,7 +50,7 @@ public class RegistrationController {
     private void openLoginView() {
         EventQueue.invokeLater(() ->
         {
-            LoginView loginView = new LoginView(authService); // Create an instance of LoginView
+            LoginView loginView = new LoginView(); // Create an instance of LoginView
             loginView.setVisible(true); // Display the LoginView
             LoginController loginController = new LoginController(loginView, authService);
         });

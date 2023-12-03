@@ -56,18 +56,16 @@ public class DatabaseUtil {
 
     public User getUserByUsername(String username) {
         try (Session session = getSession()) {
-            String query = "MATCH (u:User {username: $username}) RETURN u";
-            Result result = session.run(query, Values.parameters("username", username));
-            if (result.hasNext()) {
-                Record record = result.next();
-                Node userNode = record.get("u").asNode();
-                // Extract user properties and create User object
+            Record record = session.run("MATCH (u:User {username: $username}) RETURN u",
+                    Values.parameters("username", username)).single();
 
+            if (record != null) {
+                Node userNode = record.get("u").asNode();
                 return new User(
                         userNode.get("username").asString(),
                         userNode.get("role").asString(),
                         userNode.get("password").asString(),
-                        String.valueOf(userNode.get("userId").asLong()),
+                        userNode.get("userId").asString(),
                         userNode.get("email").asString(),
                         userNode.get("name").asString()
                 );
@@ -78,71 +76,82 @@ public class DatabaseUtil {
         return null;
     }
 
+
     // Add item to the database
     public void addItemToDatabase(Item item) {
         try (Session session = getSession()) {
-            String query = "CREATE (item:Item {name: $name, quantity: $quantity})";
-            session.run(query, Values.parameters("name", item.getItemName(), "quantity", item.getQuantity()));
+            session.run("CREATE (i:Item {itemId: $itemId, itemName: $itemName, quantity: $quantity, description: $description, price: $price})",
+                    Values.parameters(
+                            "itemId", item.getItemId(),
+                            "itemName", item.getItemName(),
+                            "quantity", item.getQuantity(),
+                            "description", item.getDescription(),
+                            "price", item.getPrice()
+                    ));
             System.out.println("Item added to the database: " + item.getItemName());
         } catch (Exception e) {
-            System.out.println("Error adding item to the database: " + e.getMessage());
+            System.out.println("Error adding item: " + e.getMessage());
         }
     }
+
 
     // Remove item from the database
     public void removeItemFromDatabase(Item item) {
         try (Session session = getSession()) {
-            String query = "MATCH (item:Item {name: $name}) DELETE item";
-            session.run(query, Values.parameters("name", item.getItemName()));
-            System.out.println("Item removed from the database: " + item.getItemName());
+            session.run("MATCH (i:Item {itemId: $itemId}) DETACH DELETE i",
+                    Values.parameters("itemId", item.getItemId()));
+            System.out.println("Item removed from the database: " + item.getItemId());
         } catch (Exception e) {
-            System.out.println("Error removing item from the database: " + e.getMessage());
+            System.out.println("Error removing item: " + e.getMessage());
         }
     }
 
-    public List<Item> getAllItemsFromDatabase()
-    {
-        List<Item> items = new ArrayList<>();
+    public List<Item> getAllItemsFromDatabase() {
+        List<Item> itemList = new ArrayList<>();
         try (Session session = getSession()) {
-            String query = "MATCH (i:Item) RETURN i";
-            Result result = session.run(query);
+            Result result = session.run("MATCH (i:Item) RETURN i");
             while (result.hasNext()) {
                 Record record = result.next();
                 Node itemNode = record.get("i").asNode();
 
-                // Extract item properties and create Item object
-                Item item = new Item(
-                        String.valueOf(itemNode.get("itemId").asLong()), // Assuming itemId is stored as a Long in the database
-                        itemNode.get("itemName").asString(),
-                        itemNode.get("quantity").asInt(),
-                        itemNode.get("description").asString(),
-                        itemNode.get("unitPrice").asDouble() // Assuming the property in the database is 'unitPrice'
-                );
+                String itemId = itemNode.get("itemId").asString();
+                String itemName = itemNode.get("itemName").asString();
+                int quantity = itemNode.get("quantity").isNull() ? 0 : itemNode.get("quantity").asInt();
+                String description = itemNode.get("description").asString();
+                double price = itemNode.get("price").isNull() ? 0.0 : itemNode.get("price").asDouble();
 
-                items.add(item);
+                itemList.add(new Item(itemId, itemName, quantity, description, price));
             }
         } catch (Exception e) {
-            System.out.println("Error retrieving items from the database: " + e.getMessage());
+            System.out.println("Error retrieving items: " + e.getMessage());
         }
-        return items;
+        return itemList;
     }
+
 
     public boolean addUser(User newUser) {
         try (Session session = getSession()) {
-            String query = "CREATE (u:User {username: $username, password: $password, role: $role, userId: $userId, email: $email, name: $name})";
-            session.run(query, Values.parameters(
-                    "username", newUser.getUsername(),
-                    "password", newUser.getPassword(),
-                    "role", newUser.getRole(),
-                    "userId", Long.parseLong(newUser.getUserId()), // Assuming userId is stored as a String in the User object
-                    "email", newUser.getUserEmail(),
-                    "name", newUser.getName()
-            ));
+            session.run("CREATE (u:User {userId: $userId, username: $username, role: $role, password: $password, email: $email, name: $name})",
+                    Values.parameters(
+                            "userId", newUser.getUserId(),
+                            "username", newUser.getUsername(),
+                            "role", newUser.getRole(),
+                            "password", newUser.getPassword(),
+                            "email", newUser.getUserEmail(),
+                            "name", newUser.getName()
+                    ));
             System.out.println("User added to the database: " + newUser.getUsername());
             return true;
         } catch (Exception e) {
-            System.out.println("Error adding user to the database: " + e.getMessage());
+            System.out.println("Error adding user: " + e.getMessage());
             return false;
         }
     }
+
+
+
+
+
+
+
 }

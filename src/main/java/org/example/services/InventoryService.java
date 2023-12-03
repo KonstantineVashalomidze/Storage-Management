@@ -56,6 +56,7 @@ public class InventoryService {
         }
     }
 
+
     // Method to load inventory from the database into memory
     private void loadInventoryFromDatabase() {
         // Retrieve inventory items from the database using DatabaseUtil and add them to the inventory list

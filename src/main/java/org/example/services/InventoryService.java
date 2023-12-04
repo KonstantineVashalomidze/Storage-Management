@@ -18,12 +18,6 @@ public class InventoryService {
         loadInventoryFromDatabase();
     }
 
-    public List<Item> getInventory(User currentUser) {
-        // Return inventory based on user access rights, if needed
-        // For simplicity, returning the whole inventory
-        return this.inventory;
-    }
-
     public List<Item> getAllItems() {
         return this.inventory;
     }
@@ -34,10 +28,15 @@ public class InventoryService {
         DatabaseUtil.getInstance().addItemToDatabase(newItem);
     }
 
-    public void removeItem(Item itemName) {
-        this.inventory.remove(itemName);
+    public void removeItem(Item item) {
+        this.inventory.remove(item);
         // Update the database after removing the item
-        DatabaseUtil.getInstance().removeItemFromDatabase(itemName);
+        DatabaseUtil.getInstance().removeItemFromDatabase(item);
+    }
+
+    public Item getItemAtIndex(int index)
+    {
+        return this.inventory.get(index);
     }
 
     public void updateItem(Item updatedItem) {
@@ -72,7 +71,6 @@ public class InventoryService {
         } catch (Exception e) {
             System.out.println("Error loading inventory from the database: " + e.getMessage());
         }
-
     }
 
 }

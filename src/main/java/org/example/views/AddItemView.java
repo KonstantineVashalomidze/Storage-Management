@@ -1,12 +1,10 @@
 package org.example.views;
 
-import org.example.models.Item;
-import org.example.util.DatabaseUtil;
-
 import javax.swing.*;
 import java.awt.*;
 
-public class AddItemDialog extends JDialog {
+public class AddItemView extends JFrame {
+
     private JLabel itemNameLabel;
     private JTextField itemNameTextField;
     private JLabel quantityLabel;
@@ -18,11 +16,12 @@ public class AddItemDialog extends JDialog {
     private JButton addButton;
     private JButton cancelButton;
 
-    public AddItemDialog(JFrame parent) {
-        super(parent, "Add New Item", true);
+
+    public AddItemView() {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(400, 250);
-        setLocationRelativeTo(parent);
+        setLocationRelativeTo(null);
+
 
         JPanel panel = new JPanel(new GridLayout(5, 2, 5, 5));
 
@@ -48,30 +47,38 @@ public class AddItemDialog extends JDialog {
         panel.add(addButton);
         panel.add(cancelButton);
 
-        addButton.addActionListener(e -> {
-            // Retrieve values from text fields
-            String itemName = itemNameTextField.getText();
-            int quantity = Integer.parseInt(quantityTextField.getText());
-            String description = descriptionTextField.getText();
-            double price = Double.parseDouble(priceTextField.getText());
 
-            // Create a new item using the retrieved values
-            Item newItem = new Item(null, itemName, quantity, description, price);
 
-            // Perform necessary actions with the new item (e.g., save to database or update UI)
-            DatabaseUtil.getInstance().addItemToDatabase(newItem);
 
-            // Close the dialog
-            dispose();
-        });
 
-        cancelButton.addActionListener(e -> {
-            // Close the dialog without adding the item
-            dispose();
-        });
 
         getContentPane().add(panel, BorderLayout.CENTER);
         setVisible(true);
+    }
+
+    public JButton getAddButton()
+    {
+        return addButton;
+    }
+
+    public JButton getCancelButton() {
+        return cancelButton;
+    }
+
+    public JTextField getItemNameTextField() {
+        return itemNameTextField;
+    }
+
+    public JTextField getQuantityTextField() {
+        return quantityTextField;
+    }
+
+    public JTextField getDescriptionTextField() {
+        return descriptionTextField;
+    }
+
+    public JTextField getPriceTextField() {
+        return priceTextField;
     }
 
 }

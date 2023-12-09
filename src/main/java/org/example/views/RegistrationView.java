@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class RegistrationView extends JFrame {
-    private JTextField usernameField, userIdField, emailField, nameField;
+    private JTextField usernameField, emailField;
     private JPasswordField passwordField, confirmPasswordField;
     private JComboBox<String> roleComboBox;
 
@@ -21,15 +21,13 @@ public class RegistrationView extends JFrame {
         setPreferredSize(new Dimension(400, 350));
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(9, 2, 10, 10));
+        panel.setLayout(new GridLayout(7, 2, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         addTextFieldWithLabel("Username:", usernameField = new JTextField(), panel);
         addPasswordFieldWithLabel("Password:", passwordField = new JPasswordField(), panel);
         addPasswordFieldWithLabel("Confirm Password:", confirmPasswordField = new JPasswordField(), panel);
-        addTextFieldWithLabel("User ID:", userIdField = new JTextField(), panel);
         addTextFieldWithLabel("Email:", emailField = new JTextField(), panel);
-        addTextFieldWithLabel("Name:", nameField = new JTextField(), panel);
 
         // Role selection
         panel.add(new JLabel("Role:"));
@@ -92,17 +90,12 @@ public class RegistrationView extends JFrame {
         return new String(confirmPasswordField.getPassword());
     }
 
-    public String getUserId() {
-        return userIdField.getText();
-    }
 
     public String getEmail() {
         return emailField.getText();
     }
 
-    public String getName() {
-        return nameField.getText();
-    }
+
 
     public String getSelectedRole() {
         return (String) roleComboBox.getSelectedItem();
@@ -113,9 +106,7 @@ public class RegistrationView extends JFrame {
         usernameField.setText("");
         passwordField.setText("");
         confirmPasswordField.setText("");
-        userIdField.setText("");
         emailField.setText("");
-        nameField.setText("");
         roleComboBox.setSelectedIndex(0);
     }
 

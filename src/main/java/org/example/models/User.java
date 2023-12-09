@@ -2,16 +2,17 @@ package org.example.models;
 
 public class User {
 
-    String username, role, password, userId, email, name;
+    private static int previousUserId = 0;
+    private String username, role, password, userId, email;
 
-    public User(String username, String role, String password, String userId, String email, String name)
+    public User(String username, String role, String password, String email)
     {
         this.username = username;
         this.role = role;
         this.password = password;
-        this.userId = userId;
+        this.userId = "user" + (previousUserId + 1);
+        previousUserId++;
         this.email = email;
-        this.name = name;
     }
 
     public String getUserEmail() {
@@ -23,10 +24,6 @@ public class User {
 
     public String getUsername() {
         return username;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getRole() {

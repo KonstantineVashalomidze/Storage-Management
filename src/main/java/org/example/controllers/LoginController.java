@@ -4,6 +4,7 @@ package org.example.controllers;
 
 import org.example.models.User;
 import org.example.services.AuthenticationService;
+import org.example.views.DashboardView;
 import org.example.views.LoginView;
 import org.example.views.RegistrationView;
 
@@ -44,7 +45,11 @@ public class LoginController {
                 // Authentication successful
                 JOptionPane.showMessageDialog(loginView, "Login Successful!");
                 // Add logic to proceed after successful login (e.g., open main dashboard)
-                new DashboardController(authenticatedUser);
+                EventQueue.invokeLater(() ->
+                {
+                    var dashboardView = new DashboardView();
+                    var dashboardController = new DashboardController(authenticatedUser, dashboardView);
+                });
                 loginView.dispose();
             } else {
                 // Authentication failed

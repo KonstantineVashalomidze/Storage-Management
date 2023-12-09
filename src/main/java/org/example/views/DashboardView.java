@@ -10,7 +10,6 @@ import java.awt.*;
 public class DashboardView extends JFrame {
 
     private JLabel titleLabel;
-    private JLabel statusLabel;
     private JTable inventoryTable; // Declaration of the inventory table
 
     private InventoryController inventoryController;
@@ -92,11 +91,6 @@ public class DashboardView extends JFrame {
         titleLabel.setText(text);
     }
 
-    public void setStatusLabel(String text) {
-        // Assuming statusLabel is a JLabel component declared elsewhere in the class
-        statusLabel.setText(text);
-    }
-
     public JButton getAddItemButton() {
         JButton addItemBtn = new JButton("Add Item");
         addItemBtn.setPreferredSize(new Dimension(200, 100)); // Set button size
@@ -106,17 +100,6 @@ public class DashboardView extends JFrame {
             System.out.println("Add Item Button Clicked");
         });
         return addItemBtn;
-    }
-
-    public JButton getGenerateReportButton() {
-        JButton generateReportBtn = new JButton("Generate Report");
-        generateReportBtn.setPreferredSize(new Dimension(200, 100)); // Set button size
-        generateReportBtn.addActionListener(e -> {
-            // Handle Generate Report Button Click
-            // Example: Generate reports or open ReportView
-            System.out.println("Generate Report Button Clicked");
-        });
-        return generateReportBtn;
     }
 
     public void initializeInventoryTable(Object[][] data, Object[] columnNames) {

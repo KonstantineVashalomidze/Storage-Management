@@ -2,7 +2,6 @@ package org.example.controllers;
 
 import org.example.models.User;
 import org.example.services.AuthenticationService;
-import org.example.util.DatabaseUtil;
 import org.example.views.LoginView;
 import org.example.views.RegistrationView;
 
@@ -60,9 +59,7 @@ public class RegistrationController {
         String username = registrationView.getUsername();
         String password = registrationView.getPassword();
         String confirmPassword = registrationView.getConfirmPassword();
-        String userId = registrationView.getUserId();
         String email = registrationView.getEmail();
-        String name = registrationView.getName();
         String role = registrationView.getSelectedRole();
 
         if (!password.equals(confirmPassword)) {
@@ -71,7 +68,7 @@ public class RegistrationController {
         }
 
         // Create a new User object with the provided details
-        User newUser = new User(username, role, password, userId, email, name);
+        User newUser = new User(username, role, password, email);
 
         // Add logic to save the user using the AuthenticationService (not implemented in this example)
         boolean registrationSuccess = authService.registerUser(newUser);

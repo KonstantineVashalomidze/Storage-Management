@@ -5,6 +5,7 @@ package org.example.controllers;
 import org.example.models.Item;
 import org.example.services.InventoryService;
 import org.example.views.AddItemView;
+import org.example.views.DashboardView;
 import org.example.views.InventoryView;
 
 import java.awt.*;
@@ -112,8 +113,8 @@ public class InventoryController {
         {
             EventQueue.invokeLater(() ->
             {
-
                 // open dashboard
+
             });
 
 

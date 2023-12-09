@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="StorageManagement" />
+        <module name="numerical-methods" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="StorageManagement" target="18" />
+    </bytecodeTargetLevel>
   </component>
 </project>

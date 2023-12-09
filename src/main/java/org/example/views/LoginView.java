@@ -1,10 +1,5 @@
 package org.example.views;
 
-import org.example.controllers.DashboardController;
-import org.example.controllers.RegistrationController;
-import org.example.models.User;
-import org.example.services.AuthenticationService;
-
 import javax.swing.*;
 import java.awt.*;
 

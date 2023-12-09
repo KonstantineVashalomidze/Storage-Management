@@ -61,7 +61,7 @@ public class InventoryView extends JFrame {
     }
 
     public void addDashboardButtonListener(InventoryController.addDashboardButtonListener listener) {
-
+        dashBoardButton.addActionListener(listener);
     }
 
     public static void main(String[] args) {

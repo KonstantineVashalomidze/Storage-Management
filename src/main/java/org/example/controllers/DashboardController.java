@@ -8,10 +8,9 @@ public class DashboardController {
     private User currentUser; // Assuming user authentication is already handled
 
 
-    public DashboardController(User currentUser) {
+    public DashboardController(User currentUser, DashboardView dashboardView) {
         this.currentUser = currentUser;
-        this.dashboardView = new DashboardView();
-        this.dashboardView.setVisible(true);
+        this.dashboardView = dashboardView;
         this.initializeView();
         this.attachEventListeners();
     }
@@ -22,26 +21,15 @@ public class DashboardController {
         dashboardView.setHeaderLabel("Welcome, " + currentUser.getUsername());
         // dashboardView.setStatusLabel("Logged in as: " + currentUser.getRole());
 
-        // Set up buttons
-        dashboardView.getRefreshButton().setText("Refresh");
-        dashboardView.getAddItemButton().setText("Add Item");
-        dashboardView.getGenerateReportButton().setText("Generate Report");
-
         // Additional UI setup as needed for the dashboard view
     }
 
     private void attachEventListeners() {
         // Add action listeners to the UI components (buttons, etc.)
         // e.g., for button clicks to perform specific actions
-        dashboardView.getRefreshButton().addActionListener(e -> {
-            // Logic to refresh or update dashboard data
-            updateDashboardData();
-        });
+
     }
 
-    private void updateDashboardData() {
-        // Fetch and update data displayed on the dashboard
-    }
 
 
 

@@ -1,4 +1,4 @@
 package org.example.util;
 
-public class ValidationUtil     {
+public class ValidationUtil {
 }

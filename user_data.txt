@@ -1,0 +1,11 @@
+username | role | password | userId
+romani.todua | Admin | 123 | user1
+davit.mamrikishvli | Manager | 321 | user2
+nika.dolbaia | Staff | 333 | user3
+kelly.kautzer | Staff | yu0choojj9nmhsp | user4
+jorge.hegmann | Staff | xwlrvszca2oa0 | user5
+kelvin.hahn | Manager | u3fkhxcg4wu06 | user6
+roxanna.collier | Staff | 9y61dmwybm3z4ff | user7
+hershel.goodwin | Staff | 9r3ofygmlle | user8
+val.bahringer | Staff | pfj190liz2t4q4 | user9
+tabetha.ernser | Staff | bp27qzvo0goid9r | user10

@@ -59,7 +59,6 @@ public class RegistrationController {
         String username = registrationView.getUsername();
         String password = registrationView.getPassword();
         String confirmPassword = registrationView.getConfirmPassword();
-        String email = registrationView.getEmail();
         String role = registrationView.getSelectedRole();
 
         if (!password.equals(confirmPassword)) {
@@ -68,7 +67,7 @@ public class RegistrationController {
         }
 
         // Create a new User object with the provided details
-        User newUser = new User(username, role, password, email);
+        User newUser = new User(username, role, password);
 
         // Add logic to save the user using the AuthenticationService (not implemented in this example)
         boolean registrationSuccess = authService.registerUser(newUser);

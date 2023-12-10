@@ -64,8 +64,7 @@ public class DatabaseUtil {
                 return new User(
                         userNode.get("username").asString(),
                         userNode.get("role").asString(),
-                        userNode.get("password").asString(),
-                        userNode.get("email").asString()
+                        userNode.get("password").asString()
                 );
             }
         } catch (Exception e) {
@@ -134,8 +133,7 @@ public class DatabaseUtil {
                             "userId", newUser.getUserId(),
                             "username", newUser.getUsername(),
                             "role", newUser.getRole(),
-                            "password", newUser.getPassword(),
-                            "email", newUser.getUserEmail()
+                            "password", newUser.getPassword()
                     ));
             System.out.println("User added to the database: " + newUser.getUsername());
             return true;

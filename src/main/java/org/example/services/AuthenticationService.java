@@ -12,7 +12,7 @@ public class AuthenticationService {
 
     public User authenticate(String username, String password) {
         // Fetch user from the database based on provided username
-        User user = databaseUtil.getUserByUsername(username);
+        User user = databaseUtil.getUserByName(username);
 
         if (user != null && user.getPassword().equals(password)) {
             // Authentication successful

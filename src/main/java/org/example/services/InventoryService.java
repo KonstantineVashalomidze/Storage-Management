@@ -1,7 +1,6 @@
 package org.example.services;
 
-import org.example.models.Item;
-import org.example.models.User;
+import org.example.models.Product;
 import org.example.util.DatabaseUtil;
 
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.List;
 
 public class InventoryService {
     // Assuming inventory is stored as a list in memory
-    private List<Item> inventory;
+    private List<Product> inventory;
 
     public InventoryService() {
         // Initialize inventory or retrieve it from a database or file
@@ -18,59 +17,39 @@ public class InventoryService {
         loadInventoryFromDatabase();
     }
 
-    public List<Item> getAllItems() {
+    public List<Product> getAllProducts() {
         return this.inventory;
     }
 
-    public void addItem(Item newItem) {
-        this.inventory.add(newItem);
-        // Persist the added item to the database
-        DatabaseUtil.getInstance().addItemToDatabase(newItem);
+    public void addProduct(Product newProduct) {
+
     }
 
-    public void removeItem(Item item) {
-        this.inventory.remove(item);
-        // Update the database after removing the item
-        DatabaseUtil.getInstance().removeItemFromDatabase(item);
+    public void removeProduct(Product product) {
+
     }
 
-    public Item getItemAtIndex(int index)
+    public Product getProductAtIndex(int index)
     {
         return this.inventory.get(index);
     }
 
-    public void updateItem(Item updatedItem) {
-        // Find the item in the inventory and update its details
-        for (Item item : this.inventory) {
-            if (item.getItemId().equals(updatedItem.getItemId())) { // Assuming each item has an ID
-                // Update the item details
-                item.setName(updatedItem.getItemName());
-                item.setDescription(updatedItem.getDescription());
-                item.setQuantity(updatedItem.getQuantity());
-                item.setPrice(Double.parseDouble(String.valueOf(updatedItem.getPrice())));
-                // Additional logic to persist the updated item to the database
-                // This logic could involve updating the existing item details in the database
-                break;
-            }
-        }
+    public void updateProduct(Product updatedProduct) {
+        // Find the product in the inventory and update its details
+
     }
 
 
     // Method to load inventory from the database into memory
     private void loadInventoryFromDatabase() {
-        // Retrieve inventory items from the database using DatabaseUtil and add them to the inventory list
+        // Retrieve inventory products from the database using DatabaseUtil and add them to the inventory list
         // For example:
-        // List<Item> itemsFromDatabase = DatabaseUtil.getAllItemsFromDatabase();
-        // this.inventory.addAll(itemsFromDatabase);
+        // List<Product> productsFromDatabase = DatabaseUtil.getAllProductsFromDatabase();
+        // this.inventory.addAll(productsFromDatabase);
 
-        // Retrieve inventory items from the database using DatabaseUtil and add them to the inventory list
-        try {
-            List<Item> itemsFromDatabase = DatabaseUtil.getInstance().getAllItemsFromDatabase();
-            this.inventory.addAll(itemsFromDatabase);
-            System.out.println("Inventory loaded from the database.");
-        } catch (Exception e) {
-            System.out.println("Error loading inventory from the database: " + e.getMessage());
-        }
+        // Retrieve inventory products from the database using DatabaseUtil and add them to the inventory list
+
+
     }
 
 }

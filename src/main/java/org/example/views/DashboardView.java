@@ -96,7 +96,7 @@ public class DashboardView extends JFrame {
         addItemBtn.setPreferredSize(new Dimension(200, 100)); // Set button size
         addItemBtn.addActionListener(e -> {
             // Handle Add Item Button Click
-            // Example: Open AddItemView or trigger item addition process
+            // Example: Open AddProductView or trigger item addition process
             System.out.println("Add Item Button Clicked");
         });
         return addItemBtn;

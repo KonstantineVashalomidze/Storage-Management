@@ -2,17 +2,14 @@ package org.example.controllers;
 
 
 
-import org.example.models.Item;
+import org.example.models.Product;
 import org.example.services.InventoryService;
-import org.example.views.AddItemView;
-import org.example.views.DashboardView;
+import org.example.views.AddProductView;
 import org.example.views.InventoryView;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-
 
 
 public class InventoryController {
@@ -20,7 +17,7 @@ public class InventoryController {
     private InventoryView inventoryView;
     private InventoryService inventoryService;
 
-    private AddItemView addItemView;
+    private AddProductView addProductView;
 
     private InventoryController self = this;
 
@@ -40,12 +37,11 @@ public class InventoryController {
 
     // Method to load inventory data and populate the UI
     public void loadInventoryData() {
-        List<Item> items = inventoryService.getAllItems();
-        inventoryView.displayItems(items);
+
     }
 
-    public AddItemView getAddItemView() {
-        return addItemView;
+    public AddProductView getAddItemView() {
+        return addProductView;
     }
 
 
@@ -58,7 +54,7 @@ public class InventoryController {
 
             // open add item dialog window
             EventQueue.invokeLater(() -> {
-                addItemView = new AddItemView();
+                addProductView = new AddProductView();
                 new AddItemDialogController(self);
             });
 
@@ -72,10 +68,10 @@ public class InventoryController {
         @Override
         public void actionPerformed(ActionEvent e) {
             // Get selected item
-            Item selectedItem = inventoryService.getItemAtIndex(inventoryView.getSelectedInventoryItemIndex());
+            Product selectedProduct = inventoryService.getProductAtIndex(inventoryView.getSelectedInventoryItemIndex());
 
             // Remove the item via the service
-            inventoryService.removeItem(selectedItem);
+            inventoryService.removeProduct(selectedProduct);
 
             // reload the data form database
             loadInventoryData();

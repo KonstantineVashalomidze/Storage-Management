@@ -1,7 +1,7 @@
 package org.example.views;
 
 import org.example.controllers.InventoryController;
-import org.example.models.Item;
+import org.example.models.Product;
 import org.example.services.InventoryService;
 
 import javax.swing.*;
@@ -17,7 +17,9 @@ public class InventoryView extends JFrame {
     private JScrollPane tableScrollPane;
 
     // Define column headers at the class level
-    private final String[] columnHeaders = {"Item ID", "Item Name", "Quantity", "Description", "Price"};
+    private final String[] columnHeaders = {"Product Name", "Category", "Selling Price", "Image", 
+            "Stock Quantity", "Description", "Cost Price", "Minimum Stock Level", "Unit of Measure", "Date Added"
+            , "Last Updated", "Product ID" };
 
     // Create table for inventory display
     private String[][] rowData = new String[][] {  };
@@ -40,8 +42,8 @@ public class InventoryView extends JFrame {
         setContentPane(mainPanel);
 
         // Create buttons
-        addButton = new JButton("Add Item");
-        removeButton = new JButton("Remove Item");
+        addButton = new JButton("Add Product");
+        removeButton = new JButton("Remove Product");
         dashBoardButton = new JButton("Back to Dashboard");
 
 
@@ -81,20 +83,27 @@ public class InventoryView extends JFrame {
 
     public void addUpdateItemListener(InventoryController.UpdateItemListener listener) {
         // Implement update listener if needed
-        // Example: For a row selection to update an item
+        // Example: For a row selection to update an product
     }
 
-    public void displayItems(List<Item> items) {
+    public void displayItems(List<Product> products) {
         // Convert list of items to table data format
-        String[][] rowData = new String[items.size()][5];
-        for (int i = 0; i < items.size(); i++) {
-            Item item = items.get(i);
+        String[][] rowData = new String[products.size()][5];
+        for (int i = 0; i < products.size(); i++) {
+            Product product = products.get(i);
             rowData[i] = new String[]{
-                    item.getItemId(),
-                    item.getItemName(),
-                    String.valueOf(item.getQuantity()),
-                    item.getDescription(),
-                    String.valueOf(item.getPrice())
+                    product.getProductName(),
+                    product.getCategory(),
+                    String.valueOf(product.getSellingPrice()),
+                    product.getImage(),
+                    String.valueOf(product.getStockQuantity()),
+                    product.getDescription(),
+                    String.valueOf(product.getCostPrice()),
+                    String.valueOf(product.getMinimumStockLevel()),
+                    product.getUnitOfMeasure(),
+                    String.valueOf(product.getDateAdded()),
+                    String.valueOf(product.getLastUpdated()),
+                    String.valueOf(product.getProductID())
             };
         }
         inventoryTable.setModel(new DefaultTableModel(rowData, columnHeaders));

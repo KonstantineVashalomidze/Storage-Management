@@ -1,16 +1,16 @@
 package org.example.models;
 
 public class Purchase {
-    private int purchaseID;
+    private String purchaseID;
     private String purchaseDate;
     private String deliveryDate;
-    private int quantity;
-    private int supplierID;
-    private int productID;
-    private int userID;
+    private String quantity;
+    private String supplierID;
+    private String productID;
+    private String userID;
 
     // Constructor
-    public Purchase(int purchaseID, String purchaseDate, String deliveryDate, int quantity, int supplierID, int productID, int userID) {
+    public Purchase(String purchaseID, String purchaseDate, String deliveryDate, String quantity, String supplierID, String productID, String userID) {
         this.purchaseID = purchaseID;
         this.purchaseDate = purchaseDate;
         this.deliveryDate = deliveryDate;
@@ -20,11 +20,11 @@ public class Purchase {
         this.userID = userID;
     }
 
-    public int getPurchaseID() {
+    public String getPurchaseID() {
         return purchaseID;
     }
 
-    public void setPurchaseID(int purchaseID) {
+    public void setPurchaseID(String purchaseID) {
         this.purchaseID = purchaseID;
     }
 
@@ -44,35 +44,35 @@ public class Purchase {
         this.deliveryDate = deliveryDate;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
-    public int getSupplierID() {
+    public String getSupplierID() {
         return supplierID;
     }
 
-    public void setSupplierID(int supplierID) {
+    public void setSupplierID(String supplierID) {
         this.supplierID = supplierID;
     }
 
-    public int getProductID() {
+    public String getProductID() {
         return productID;
     }
 
-    public void setProductID(int productID) {
+    public void setProductID(String productID) {
         this.productID = productID;
     }
 
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 

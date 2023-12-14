@@ -1,15 +1,15 @@
 package org.example.models;
 
 public class Transaction {
-    private int transactionID;
+    private String transactionID;
     private String date;
-    private double totalCost;
-    private int customerID;
-    private int productID;
+    private String totalCost;
+    private String customerID;
+    private String productID;
     private String discountsApplied;
 
     // Constructor
-    public Transaction(int transactionID, String date, double totalCost, int customerID, int productID, String discountsApplied) {
+    public Transaction(String transactionID, String date, String totalCost, String customerID, String productID, String discountsApplied) {
         this.transactionID = transactionID;
         this.date = date;
         this.totalCost = totalCost;
@@ -18,11 +18,11 @@ public class Transaction {
         this.discountsApplied = discountsApplied;
     }
 
-    public int getTransactionID() {
+    public String getTransactionID() {
         return transactionID;
     }
 
-    public void setTransactionID(int transactionID) {
+    public void setTransactionID(String transactionID) {
         this.transactionID = transactionID;
     }
 
@@ -34,27 +34,27 @@ public class Transaction {
         this.date = date;
     }
 
-    public double getTotalCost() {
+    public String getTotalCost() {
         return totalCost;
     }
 
-    public void setTotalCost(double totalCost) {
+    public void setTotalCost(String totalCost) {
         this.totalCost = totalCost;
     }
 
-    public int getCustomerID() {
+    public String getCustomerID() {
         return customerID;
     }
 
-    public void setCustomerID(int customerID) {
+    public void setCustomerID(String customerID) {
         this.customerID = customerID;
     }
 
-    public int getProductID() {
+    public String getProductID() {
         return productID;
     }
 
-    public void setProductID(int productID) {
+    public void setProductID(String productID) {
         this.productID = productID;
     }
 

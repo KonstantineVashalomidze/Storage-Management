@@ -5,21 +5,21 @@ import java.util.Date;
 public class Product {
     private String productName;
     private String category;
-    private double sellingPrice;
+    private String sellingPrice;
     private String image;
-    private int stockQuantity;
+    private String stockQuantity;
     private String description;
-    private double costPrice;
-    private int minimumStockLevel;
+    private String costPrice;
+    private String minimumStockLevel;
     private String unitOfMeasure;
-    private Date dateAdded;
-    private Date lastUpdated;
-    private int productID;
+    private String dateAdded;
+    private String lastUpdated;
+    private String productID;
 
     // Constructor
-    public Product(String productName, String category, double sellingPrice, String image, int stockQuantity,
-                   String description, double costPrice, int minimumStockLevel, String unitOfMeasure,
-                   Date dateAdded, Date lastUpdated, int productID) {
+    public Product(String productName, String category, String sellingPrice, String image, String stockQuantity,
+                   String description, String costPrice, String minimumStockLevel, String unitOfMeasure,
+                   String dateAdded, String lastUpdated, String productID) {
         this.productName = productName;
         this.category = category;
         this.sellingPrice = sellingPrice;
@@ -50,11 +50,11 @@ public class Product {
         this.category = category;
     }
 
-    public double getSellingPrice() {
+    public String getSellingPrice() {
         return sellingPrice;
     }
 
-    public void setSellingPrice(double sellingPrice) {
+    public void setSellingPrice(String sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
 
@@ -66,11 +66,11 @@ public class Product {
         this.image = image;
     }
 
-    public int getStockQuantity() {
+    public String getStockQuantity() {
         return stockQuantity;
     }
 
-    public void setStockQuantity(int stockQuantity) {
+    public void setStockQuantity(String stockQuantity) {
         this.stockQuantity = stockQuantity;
     }
 
@@ -82,19 +82,19 @@ public class Product {
         this.description = description;
     }
 
-    public double getCostPrice() {
+    public String getCostPrice() {
         return costPrice;
     }
 
-    public void setCostPrice(double costPrice) {
+    public void setCostPrice(String costPrice) {
         this.costPrice = costPrice;
     }
 
-    public int getMinimumStockLevel() {
+    public String getMinimumStockLevel() {
         return minimumStockLevel;
     }
 
-    public void setMinimumStockLevel(int minimumStockLevel) {
+    public void setMinimumStockLevel(String minimumStockLevel) {
         this.minimumStockLevel = minimumStockLevel;
     }
 
@@ -106,27 +106,27 @@ public class Product {
         this.unitOfMeasure = unitOfMeasure;
     }
 
-    public Date getDateAdded() {
+    public String getDateAdded() {
         return dateAdded;
     }
 
-    public void setDateAdded(Date dateAdded) {
+    public void setDateAdded(String dateAdded) {
         this.dateAdded = dateAdded;
     }
 
-    public Date getLastUpdated() {
+    public String getLastUpdated() {
         return lastUpdated;
     }
 
-    public void setLastUpdated(Date lastUpdated) {
+    public void setLastUpdated(String lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
 
-    public int getProductID() {
+    public String getProductID() {
         return productID;
     }
 
-    public void setProductID(int productID) {
+    public void setProductID(String productID) {
         this.productID = productID;
     }
 

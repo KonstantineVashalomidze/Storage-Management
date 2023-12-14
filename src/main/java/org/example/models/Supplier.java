@@ -1,22 +1,22 @@
 package org.example.models;
 
 public class Supplier {
-    private int supplierID;
+    private String supplierID;
     private String supplierName;
     private String contactInformation;
 
     // Constructor
-    public Supplier(int supplierID, String supplierName, String contactInformation) {
+    public Supplier(String supplierID, String supplierName, String contactInformation) {
         this.supplierID = supplierID;
         this.supplierName = supplierName;
         this.contactInformation = contactInformation;
     }
 
-    public int getSupplierID() {
+    public String getSupplierID() {
         return supplierID;
     }
 
-    public void setSupplierID(int supplierID) {
+    public void setSupplierID(String supplierID) {
         this.supplierID = supplierID;
     }
 

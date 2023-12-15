@@ -1,6 +1,7 @@
 package org.example.views;
 
 import org.example.controllers.InventoryController;
+import org.example.controllers.NavBarController;
 import org.example.models.Product;
 import org.example.services.InventoryService;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public class InventoryView extends JFrame {
     // Components for Inventory Management Screen
     private JPanel mainPanel;
-    private JButton addButton, removeButton, dashBoardButton;
+    private JButton addButton, removeButton;
     private JTable inventoryTable;
     private JScrollPane tableScrollPane;
 
@@ -37,6 +38,11 @@ public class InventoryView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
 
+        // Create navbar
+        var navBar = new NavBar();
+        var navBarController = new NavBarController(navBar, this);
+
+
         // Initialize main panel and layout
         mainPanel = new JPanel(new BorderLayout());
         setContentPane(mainPanel);
@@ -44,27 +50,28 @@ public class InventoryView extends JFrame {
         // Create buttons
         addButton = new JButton("Add Product");
         removeButton = new JButton("Remove Product");
-        dashBoardButton = new JButton("Back to Dashboard");
 
 
         inventoryTable = new JTable(rowData, columnHeaders);
         tableScrollPane = new JScrollPane(inventoryTable);
 
+        mainPanel.add(navBar, BorderLayout.NORTH);
+
+
         // Add components to the main panel
         mainPanel.add(tableScrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
-        buttonPanel.add(dashBoardButton);
         buttonPanel.add(addButton);
         buttonPanel.add(removeButton);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
+
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    public void addDashboardButtonListener(InventoryController.addDashboardButtonListener listener) {
-        dashBoardButton.addActionListener(listener);
-    }
+
 
     public static void main(String[] args) {
         var invView = new InventoryView();
@@ -73,22 +80,18 @@ public class InventoryView extends JFrame {
     }
 
 
-    public void addAddItemListener(InventoryController.AddItemListener listener) {
-        addButton.addActionListener(listener);
+    public JButton getAddButton() {
+        return addButton;
     }
 
-    public void addRemoveItemListener(InventoryController.RemoveItemListener listener) {
-        removeButton.addActionListener(listener);
+    public JButton getRemoveButton() {
+        return removeButton;
     }
 
-    public void addUpdateItemListener(InventoryController.UpdateItemListener listener) {
-        // Implement update listener if needed
-        // Example: For a row selection to update an product
-    }
 
     public void displayItems(List<Product> products) {
         // Convert list of items to table data format
-        String[][] rowData = new String[products.size()][5];
+        String[][] rowData = new String[products.size()][0];
         for (int i = 0; i < products.size(); i++) {
             Product product = products.get(i);
             rowData[i] = new String[]{
@@ -111,7 +114,6 @@ public class InventoryView extends JFrame {
 
     public int getSelectedInventoryItemIndex() {
         return inventoryTable.getSelectedRow();
-
     }
 
 }

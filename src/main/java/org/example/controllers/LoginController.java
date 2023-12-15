@@ -4,14 +4,16 @@ package org.example.controllers;
 
 import org.example.models.User;
 import org.example.services.AuthenticationService;
-import org.example.views.DashboardView;
+import org.example.services.InventoryService;
+import org.example.views.InventoryView;
+import org.example.views.NavBar;
 import org.example.views.LoginView;
 import org.example.views.RegistrationView;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginController {
+public class LoginController implements Controller {
     private final LoginView loginView;
     private final AuthenticationService authService;
 
@@ -45,10 +47,10 @@ public class LoginController {
                 // Authentication successful
                 JOptionPane.showMessageDialog(loginView, "Login Successful!");
                 // Add logic to proceed after successful login (e.g., open main dashboard)
-                EventQueue.invokeLater(() ->
-                {
-                    var dashboardView = new DashboardView();
-                    var dashboardController = new DashboardController(authenticatedUser, dashboardView);
+                EventQueue.invokeLater(() -> {
+                    var inventoryView = new InventoryView();
+                    var inventoryService = new InventoryService();
+                    var inventoryController = new InventoryController(inventoryView, inventoryService);
                 });
                 loginView.dispose();
             } else {
@@ -61,17 +63,20 @@ public class LoginController {
 
     }
 
+    public LoginView getLoginView() {
+        return loginView;
+    }
 
-    // Method to open the LoginView
+
+
+    // Method to open the RegistrationView
     private void openRegisterView() {
 
         EventQueue.invokeLater(() -> {
             RegistrationView registrationView = new RegistrationView(); // Create an instance of registrationView
-            registrationView.setVisible(true); // Display the registrationView
-            RegistrationController registrationController = new RegistrationController(registrationView, authService);
+            RegistrationController registrationController = new RegistrationController(registrationView);
         });
     }
 
 
-    // You can include additional methods for handling other login-related functionalities or validations.
 }

@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class RegistrationView extends JFrame {
-    private JTextField usernameField, emailField;
+    private JTextField usernameField;
     private JPasswordField passwordField, confirmPasswordField;
     private JComboBox<String> roleComboBox;
 
@@ -21,13 +21,12 @@ public class RegistrationView extends JFrame {
         setPreferredSize(new Dimension(400, 350));
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(7, 2, 10, 10));
+        panel.setLayout(new GridLayout(6, 2, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         addTextFieldWithLabel("Username:", usernameField = new JTextField(), panel);
         addPasswordFieldWithLabel("Password:", passwordField = new JPasswordField(), panel);
         addPasswordFieldWithLabel("Confirm Password:", confirmPasswordField = new JPasswordField(), panel);
-        addTextFieldWithLabel("Email:", emailField = new JTextField(), panel);
 
         // Role selection
         panel.add(new JLabel("Role:"));
@@ -91,9 +90,6 @@ public class RegistrationView extends JFrame {
     }
 
 
-    public String getEmail() {
-        return emailField.getText();
-    }
 
 
 
@@ -106,7 +102,6 @@ public class RegistrationView extends JFrame {
         usernameField.setText("");
         passwordField.setText("");
         confirmPasswordField.setText("");
-        emailField.setText("");
         roleComboBox.setSelectedIndex(0);
     }
 

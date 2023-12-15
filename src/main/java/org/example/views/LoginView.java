@@ -69,6 +69,7 @@ public class LoginView extends JFrame {
     }
 
 
+
     public JButton getRegistrationButton() {
         return registrationButton;
     }

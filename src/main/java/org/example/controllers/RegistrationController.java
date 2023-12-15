@@ -2,6 +2,7 @@ package org.example.controllers;
 
 import org.example.models.User;
 import org.example.services.AuthenticationService;
+import org.example.util.DatabaseUtil;
 import org.example.views.LoginView;
 import org.example.views.RegistrationView;
 
@@ -9,16 +10,30 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class RegistrationController {
+public class RegistrationController implements Controller {
     private final RegistrationView registrationView;
     private final AuthenticationService authService;
 
-    public RegistrationController(RegistrationView registrationView, AuthenticationService authService) {
+    public RegistrationController(RegistrationView registrationView) {
         this.registrationView = registrationView;
-        this.authService = authService;
+        this.authService = AuthenticationService.getInstance();
 
         attachRegisterActionListener();
         attachLoginActionListener();
+
+        // set maximum id that is currently in database for the user
+        setMaximumId();
+    }
+
+    private void setMaximumId() {
+        var maxId = 0;
+        for (User user : DatabaseUtil.getInstance().getAllTheUsers())
+        {
+            String userId = user.getUserId();
+            maxId = Math.max(maxId, Integer.parseInt(userId.substring(4)));
+
+        }
+        User.maxiMumUserID = maxId;
     }
 
     private void attachRegisterActionListener() {
@@ -50,9 +65,12 @@ public class RegistrationController {
         EventQueue.invokeLater(() ->
         {
             LoginView loginView = new LoginView(); // Create an instance of LoginView
-            loginView.setVisible(true); // Display the LoginView
             LoginController loginController = new LoginController(loginView, authService);
         });
+    }
+
+    public RegistrationView getRegistrationView() {
+        return registrationView;
     }
 
     private boolean onRegisterButtonClick(ActionEvent e) {

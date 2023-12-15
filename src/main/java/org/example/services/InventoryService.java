@@ -42,14 +42,7 @@ public class InventoryService {
 
     // Method to load inventory from the database into memory
     private void loadInventoryFromDatabase() {
-        // Retrieve inventory products from the database using DatabaseUtil and add them to the inventory list
-        // For example:
-        // List<Product> productsFromDatabase = DatabaseUtil.getAllProductsFromDatabase();
-        // this.inventory.addAll(productsFromDatabase);
-
-        // Retrieve inventory products from the database using DatabaseUtil and add them to the inventory list
-
-
+        inventory = DatabaseUtil.getInstance().getAllTheProduct();
     }
 
 }

@@ -1,10 +1,7 @@
 package org.example.controllers;
 
 import org.example.models.User;
-import org.example.services.AuthenticationService;
-import org.example.services.CustomersService;
-import org.example.services.InventoryService;
-import org.example.services.SuppliersService;
+import org.example.services.*;
 import org.example.views.*;
 
 import javax.swing.*;
@@ -22,45 +19,17 @@ public class NavBarController implements Controller {
         this.currentWindow = currentWindow;
 
         navBar.getInventoryBtn().addActionListener(inventoryClk());
-        navBar.getLoginButton().addActionListener(loginClk());
-        navBar.getRegistrationButton().addActionListener(registrationClk());
-        navBar.getCustomers().addActionListener(customersClk());
-        navBar.getSuppliers().addActionListener(suppliersClk());
+        navBar.getCustomersBtn().addActionListener(customersClk());
+        navBar.getSuppliersBtn().addActionListener(suppliersClk());
+        navBar.getPurchaseBtn().addActionListener(purchaseClk());
+        navBar.getTransactionsBtn().addActionListener(transactionsClk());
     }
+
 
     private void destroyParentWindow()
     {
         currentWindow.dispose();
     }
-
-    private ActionListener registrationClk() {
-        return (e) -> {
-
-            if (!currentWindow.getClass().getSimpleName().equals("RegistrationView"))
-            {
-                EventQueue.invokeLater(() -> {
-                    var registrationView = new RegistrationView();
-                    var registrationController = new RegistrationController(registrationView);
-                    destroyParentWindow();
-                });
-            }
-        };
-    }
-
-    private ActionListener loginClk() {
-        return (e) -> {
-            if (!currentWindow.getClass().getSimpleName().equals("LoginView"))
-            {
-                EventQueue.invokeLater(() -> {
-                    var loginView = new LoginView();
-                    var loginController = new LoginController(loginView, AuthenticationService.getInstance());
-                    destroyParentWindow();
-
-                });
-            }
-        };
-    }
-
 
     private ActionListener inventoryClk()
     {
@@ -110,6 +79,35 @@ public class NavBarController implements Controller {
         };
     }
 
+
+    private ActionListener purchaseClk()
+    {
+        return (e) -> {
+            if (!currentWindow.getClass().getSimpleName().equals("PurchasesView"))
+            {
+                EventQueue.invokeLater(() -> {
+                   var purchasesView = new PurchasesView();
+                   var purchasesService = new PurchasesService();
+                   var purchasesController = new PurchasesController(purchasesView, purchasesService);
+                   destroyParentWindow();
+                });
+            }
+        };
+    }
+
+    private ActionListener transactionsClk()
+    {
+        return (e) -> {
+          if (!currentWindow.getClass().getSimpleName().equals("TransactionsView")){
+              EventQueue.invokeLater(() -> {
+                  var transactionsView = new TransactionsView();
+                  var transactionsService = new TransactionsService();
+                  var transactionsController = new TransactionsController(transactionsView, transactionsService);
+                  destroyParentWindow();
+              });
+          }
+        };
+    }
 
 
 }

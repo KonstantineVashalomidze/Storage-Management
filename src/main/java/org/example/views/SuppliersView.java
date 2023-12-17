@@ -26,11 +26,7 @@ public class SuppliersView
     private String[][] rowData = new String[][] {  };
 
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
 
-        });
-    }
 
 
     public SuppliersView()

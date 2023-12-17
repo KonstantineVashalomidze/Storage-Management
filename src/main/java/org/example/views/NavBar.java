@@ -1,16 +1,19 @@
 package org.example.views;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-public class NavBar extends JPanel {
+public class NavBar
+    extends JPanel
+{
     private JButton inventoryBtn = new JButton("Inventory");
-    private JButton loginButton = new JButton("Login");
-    private JButton registrationButton = new JButton("Registration");
-    private JButton customers = new JButton("Customers");
+    private JButton customersBtn = new JButton("Customers");
 
-    private JButton suppliers = new JButton("Suppliers");
+    private JButton suppliersBtn = new JButton("Suppliers");
+
+    private JButton purchasesBtn = new JButton("Purchases");
+
+    private JButton transactionsBtn = new JButton("Transactions");
 
     public NavBar() {
         initComponents();
@@ -20,37 +23,30 @@ public class NavBar extends JPanel {
     private void initComponents() {
         JPanel centerPanel = new JPanel(new FlowLayout()); // Grid layout for responsive design
 
-        centerPanel.add(suppliers);
-        centerPanel.add(customers);
+        centerPanel.add(suppliersBtn);
+        centerPanel.add(customersBtn);
         centerPanel.add(inventoryBtn);
-        centerPanel.add(loginButton);
-        centerPanel.add(registrationButton);
+        centerPanel.add(purchasesBtn);
+        centerPanel.add(transactionsBtn);
 
         add(centerPanel);
 
     }
 
-    public JButton getSuppliers()
+    public JButton getSuppliersBtn()
     {
-        return suppliers;
+        return suppliersBtn;
     }
-
-    public JButton getCustomers() {
-        return customers;
+    public JButton getCustomersBtn() {
+        return customersBtn;
     }
-
-    public JButton getLoginButton() {
-        return loginButton;
-    }
-
-    public JButton getRegistrationButton() {
-        return registrationButton;
-    }
-
     public JButton getInventoryBtn() {
         return inventoryBtn;
     }
-
-
-
+    public JButton getPurchaseBtn() {
+        return purchasesBtn;
+    }
+    public JButton getTransactionsBtn() {
+        return transactionsBtn;
+    }
 }

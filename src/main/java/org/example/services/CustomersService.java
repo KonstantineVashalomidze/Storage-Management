@@ -33,7 +33,7 @@ public class CustomersService
         return this.customers.get(index);
     }
 
-    public void updateProduct(Product updatedProduct) {
+    public void updateCustomer(Customer customer) {
         // Find the product in the inventory and update its details
 
     }

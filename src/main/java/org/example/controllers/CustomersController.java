@@ -26,7 +26,7 @@ public class CustomersController
     }
     public void loadCustomersData()
     {
-        var customers = DatabaseUtil.getInstance().getAllTheCustomers();
+        var customers = customersService.getAllCustomers();
         customersView.displayCustomers(customers);
     }
 

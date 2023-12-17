@@ -28,7 +28,7 @@ public class SuppliersController
     }
     public void loadSuppliersData()
     {
-        var suppliers = DatabaseUtil.getInstance().getAllTheSuppliers();
+        var suppliers = suppliersService.getAllSuppliers();
         suppliersView.displaySuppliers(suppliers);
     }
 

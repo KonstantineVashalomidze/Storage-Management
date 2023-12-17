@@ -1,9 +1,7 @@
 package org.example.util;
 
-import org.example.models.Customer;
-import org.example.models.Product;
-import org.example.models.Supplier;
-import org.example.models.User;
+import org.example.models.*;
+import org.example.models.Transaction;
 import org.neo4j.driver.*;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.types.Node;
@@ -215,5 +213,111 @@ public class DatabaseUtil {
             e.printStackTrace();
         }
         return supplierList;
+    }
+
+    public List<Purchase> getAllThePurchases() {
+        List<Purchase> purchaseList = new ArrayList<>();
+        try (Session session = getSession())
+        {
+            Result result = session.run(
+                    "MATCH (p:Purchase)-[:FROM_SUPPLIER]->(s:Supplier),\n" +
+                    "      (p)-[:THE_PRODUCT]->(pr:Product),\n" +
+                    "      (p)-[:MADE_BY_USER]->(u:User)\n" +
+                    "      RETURN p.purchaseId AS purchaseId,\n" +
+                    "      p.purchaseDate AS purchaseDate,\n" +
+                    "      p.deliveryDate AS deliveryDate,\n" +
+                    "      p.quantity AS quantity,\n" +
+                    "      s.supplierID AS supplierID,\n" +
+                    "      pr.productID AS productID,\n" +
+                    "      u.userId AS userId\n");
+
+            while (result.hasNext())
+            {
+                Record record = result.next();
+
+                // Extract properties from the record
+                String purchaseId = record.get("purchaseId").asString();
+                String purchaseDate = record.get("purchaseDate").asString();
+                String deliveryDate = record.get("deliveryDate").asString();
+                String quantity = record.get("quantity").asString();
+                String supplierId = record.get("supplierID").asString();
+                String productId = record.get("productID").asString();
+                String userId = record.get("userId").asString();
+
+                // Create a Purchase object and add it to the list
+                Purchase purchase = new Purchase(
+                        purchaseId,
+                        purchaseDate,
+                        deliveryDate,
+                        quantity,
+                        supplierId,
+                        productId,
+                        userId
+                );
+
+                purchaseList.add(purchase);
+            }
+
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return purchaseList;
+
+
+
+    }
+
+    public List<Transaction> getAllTheTransactions() {
+        List<Transaction> transactionList = new ArrayList<>();
+        try (Session session = getSession())
+        {
+            Result result = session.run(
+                    "MATCH (t:Transaction)-[:MADE_PURCHASE]->(c:Customer),\n" +
+                            "(t)-[:OF_PRODUCT]->(p:Product)\n" +
+                            "RETURN t.date AS date,\n" +
+                            "t.discountsApplied AS discountsApplied,\n" +
+                            "t.totalCost AS totalCost,\n" +
+                            "t.transactionId AS transactionId,\n" +
+                            "c.customerID AS customerID,\n" +
+                            "p.productID AS productID\n");
+
+            while (result.hasNext())
+            {
+                Record record = result.next();
+
+                // Extract properties from the record
+                String transactionID = record.get("transactionId").asString();
+                String date = record.get("date").asString();
+                String totalCost = record.get("totalCost").asString();
+                String customerID = record.get("customerID").asString();
+                String productID = record.get("productID").asString();
+                String discountsApplied = record.get("discountsApplied").asString();
+
+
+
+                // Create a Purchase object and add it to the list
+                Transaction transaction = new Transaction(
+                        transactionID,
+                        date,
+                        totalCost,
+                        customerID,
+                        productID,
+                        discountsApplied
+                );
+
+                transactionList.add(transaction);
+            }
+
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return transactionList;
+
     }
 }

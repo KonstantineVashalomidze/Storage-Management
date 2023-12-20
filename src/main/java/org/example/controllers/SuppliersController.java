@@ -19,10 +19,6 @@ public class SuppliersController
         this.suppliersView = suppliersView;
         this.suppliersService = suppliersService;
 
-        // Attach listeners to UI components
-        this.suppliersView.getAddButton().addActionListener(onAddClk());
-        this.suppliersView.getRemoveButton().addActionListener(onRemoveClk());
-
         loadSuppliersData();
 
     }
@@ -30,29 +26,6 @@ public class SuppliersController
     {
         var suppliers = suppliersService.getAllSuppliers();
         suppliersView.displaySuppliers(suppliers);
-    }
-
-
-    private ActionListener onAddClk()
-    {
-        return (e) -> {
-
-        };
-    }
-
-    // ActionListener for removing an item
-    private ActionListener onRemoveClk()
-    {
-        return (e) -> {
-            // Get selected item
-            Supplier selectedSupplier = suppliersService.getSupplierAtIndex(suppliersView.getSelectedSupplierIndex());
-
-            // Remove the item via the service
-            suppliersService.removeSupplier(selectedSupplier);
-
-            // reload the data form database
-            loadSuppliersData();
-        };
     }
 
 

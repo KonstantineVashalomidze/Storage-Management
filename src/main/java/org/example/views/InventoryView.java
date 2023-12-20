@@ -13,7 +13,6 @@ import java.util.List;
 public class InventoryView extends JFrame {
     // Components for Inventory Management Screen
     private JPanel mainPanel;
-    private JButton addButton, removeButton;
     private JTable inventoryTable;
     private JScrollPane tableScrollPane;
 
@@ -47,11 +46,6 @@ public class InventoryView extends JFrame {
         mainPanel = new JPanel(new BorderLayout());
         setContentPane(mainPanel);
 
-        // Create buttons
-        addButton = new JButton("Add Product");
-        removeButton = new JButton("Remove Product");
-
-
         inventoryTable = new JTable(rowData, columnHeaders);
         tableScrollPane = new JScrollPane(inventoryTable);
 
@@ -62,8 +56,6 @@ public class InventoryView extends JFrame {
         mainPanel.add(tableScrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
-        buttonPanel.add(addButton);
-        buttonPanel.add(removeButton);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
 
@@ -77,15 +69,6 @@ public class InventoryView extends JFrame {
         var invView = new InventoryView();
         var invService = new InventoryService();
         var invController = new InventoryController(invView, invService);
-    }
-
-
-    public JButton getAddButton() {
-        return addButton;
-    }
-
-    public JButton getRemoveButton() {
-        return removeButton;
     }
 
 

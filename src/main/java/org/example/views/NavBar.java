@@ -15,6 +15,8 @@ public class NavBar
 
     private JButton transactionsBtn = new JButton("Transactions");
 
+    private JButton usersBtn = new JButton("Users");
+
     public NavBar() {
         initComponents();
     }
@@ -28,6 +30,7 @@ public class NavBar
         centerPanel.add(inventoryBtn);
         centerPanel.add(purchasesBtn);
         centerPanel.add(transactionsBtn);
+        centerPanel.add(usersBtn);
 
         add(centerPanel);
 
@@ -49,4 +52,6 @@ public class NavBar
     public JButton getTransactionsBtn() {
         return transactionsBtn;
     }
+    public JButton getUsersBtn() { return usersBtn; }
+
 }

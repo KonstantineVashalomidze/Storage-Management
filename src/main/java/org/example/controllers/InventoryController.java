@@ -4,8 +4,6 @@ package org.example.controllers;
 
 import org.example.models.Product;
 import org.example.services.InventoryService;
-import org.example.util.DatabaseUtil;
-import org.example.views.AddProductView;
 import org.example.views.InventoryView;
 
 import java.awt.*;
@@ -21,10 +19,6 @@ public class InventoryController implements Controller {
         this.inventoryView = inventoryView;
         this.inventoryService = inventoryService;
 
-        // Attach listeners to UI components
-        this.inventoryView.getAddButton().addActionListener(onAddClk());
-        this.inventoryView.getRemoveButton().addActionListener(onRemoveClk());
-
         // load inventory from database
         loadInventoryData();
 
@@ -37,49 +31,7 @@ public class InventoryController implements Controller {
     }
 
 
-    // ActionListener for adding an item
-    private ActionListener onAddClk()
-    {
-        return (e) -> {
-            // open add item dialog window
 
-        };
-    }
-
-    // ActionListener for removing an item
-    private ActionListener onRemoveClk()
-    {
-        return (e) -> {
-            // Get selected item
-            Product selectedProduct = inventoryService.getProductAtIndex(inventoryView.getSelectedInventoryItemIndex());
-
-            // Remove the item via the service
-            inventoryService.removeProduct(selectedProduct);
-
-            // reload the data form database
-            loadInventoryData();
-        };
-    }
-
-    private ActionListener onDashboardClk()
-    {
-        return (e) -> {
-
-        };
-    }
-
-
-
-
-
-
-    public InventoryView getInventoryView() {
-        return inventoryView;
-    }
-
-    public InventoryService getInventoryService() {
-        return inventoryService;
-    }
 
 
 }

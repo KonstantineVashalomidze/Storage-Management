@@ -15,7 +15,6 @@ public class SuppliersView
     extends JFrame
 {
     private JPanel mainPanel;
-    private JButton addButton, removeButton;
     private JTable suppliersTable;
     private JScrollPane tableScrollPane;
 
@@ -48,10 +47,6 @@ public class SuppliersView
         mainPanel = new JPanel(new BorderLayout());
         setContentPane(mainPanel);
 
-        // Create buttons
-        addButton = new JButton("Add Supplier");
-        removeButton = new JButton("Remove Supplier");
-
 
         suppliersTable = new JTable(rowData, columnHeaders);
         tableScrollPane = new JScrollPane(suppliersTable);
@@ -63,8 +58,6 @@ public class SuppliersView
         mainPanel.add(tableScrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
-        buttonPanel.add(addButton);
-        buttonPanel.add(removeButton);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
 
@@ -91,12 +84,6 @@ public class SuppliersView
         return suppliersTable.getSelectedRow();
     }
 
-    public JButton getAddButton() {
-        return addButton;
-    }
 
-    public JButton getRemoveButton() {
-        return removeButton;
-    }
 
 }

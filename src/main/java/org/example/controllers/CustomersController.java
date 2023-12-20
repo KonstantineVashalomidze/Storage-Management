@@ -17,10 +17,6 @@ public class CustomersController
         this.customersView = customersView;
         this.customersService = customersService;
 
-        // Attach listeners to UI components
-        this.customersView.getAddButton().addActionListener(onAddClk());
-        this.customersView.getRemoveButton().addActionListener(onRemoveClk());
-
         loadCustomersData();
 
     }
@@ -29,30 +25,6 @@ public class CustomersController
         var customers = customersService.getAllCustomers();
         customersView.displayCustomers(customers);
     }
-
-
-    private ActionListener onAddClk()
-    {
-        return (e) -> {
-
-        };
-    }
-
-    // ActionListener for removing an item
-    private ActionListener onRemoveClk()
-    {
-        return (e) -> {
-            // Get selected item
-            Customer selectedCustomer = customersService.getCustomerAtIndex(customersView.getSelectedCustomerIndex());
-
-            // Remove the item via the service
-            customersService.removeCustomer(selectedCustomer);
-
-            // reload the data form database
-            loadCustomersData();
-        };
-    }
-
 
 
 }

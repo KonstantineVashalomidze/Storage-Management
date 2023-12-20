@@ -23,7 +23,10 @@ public class NavBarController implements Controller {
         navBar.getSuppliersBtn().addActionListener(suppliersClk());
         navBar.getPurchaseBtn().addActionListener(purchaseClk());
         navBar.getTransactionsBtn().addActionListener(transactionsClk());
+        navBar.getUsersBtn().addActionListener(usersClk());
     }
+
+
 
 
     private void destroyParentWindow()
@@ -106,6 +109,21 @@ public class NavBarController implements Controller {
                   destroyParentWindow();
               });
           }
+        };
+    }
+
+
+    private ActionListener usersClk() {
+        return (e) -> {
+            if (!currentWindow.getClass().getSimpleName().equals("UsersView"))
+            {
+                EventQueue.invokeLater(() -> {
+                    var usersView = new UsersView();
+                    var usersService = new UsersService();
+                    var usersController = new UsersController(usersView, usersService);
+                    destroyParentWindow();
+                });
+            }
         };
     }
 

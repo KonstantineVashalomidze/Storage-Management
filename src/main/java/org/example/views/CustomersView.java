@@ -15,7 +15,6 @@ public class CustomersView
     extends JFrame
 {
     private JPanel mainPanel;
-    private JButton addButton, removeButton;
     private JTable customersTable;
     private JScrollPane tableScrollPane;
 
@@ -42,11 +41,6 @@ public class CustomersView
         mainPanel = new JPanel(new BorderLayout());
         setContentPane(mainPanel);
 
-        // Create buttons
-        addButton = new JButton("Add Customer");
-        removeButton = new JButton("Remove Customer");
-
-
         customersTable = new JTable(rowData, columnHeaders);
         tableScrollPane = new JScrollPane(customersTable);
 
@@ -57,8 +51,6 @@ public class CustomersView
         mainPanel.add(tableScrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
-        buttonPanel.add(addButton);
-        buttonPanel.add(removeButton);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
 
@@ -85,13 +77,7 @@ public class CustomersView
         return customersTable.getSelectedRow();
     }
 
-    public JButton getAddButton() {
-        return addButton;
-    }
 
-    public JButton getRemoveButton() {
-        return removeButton;
-    }
 
 
 

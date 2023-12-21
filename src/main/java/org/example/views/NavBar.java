@@ -2,56 +2,74 @@ package org.example.views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class NavBar
-    extends JPanel
-{
-    private JButton inventoryBtn = new JButton("Inventory");
-    private JButton customersBtn = new JButton("Customers");
-
-    private JButton suppliersBtn = new JButton("Suppliers");
-
-    private JButton purchasesBtn = new JButton("Purchases");
-
-    private JButton transactionsBtn = new JButton("Transactions");
-
-    private JButton usersBtn = new JButton("Users");
+public class NavBar extends JPanel {
+    private JTextField searchField = new JTextField("Search");
+    private JComboBox<String> pageDropdown = new JComboBox<>();
+    private String[] pageOptions = {"Inventory", "Customers", "Suppliers", "Purchases", "Transactions", "Users"};
 
     public NavBar() {
         initComponents();
     }
 
-
     private void initComponents() {
-        JPanel centerPanel = new JPanel(new FlowLayout()); // Grid layout for responsive design
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0; // Allow components to expand horizontally
 
-        centerPanel.add(suppliersBtn);
-        centerPanel.add(customersBtn);
-        centerPanel.add(inventoryBtn);
-        centerPanel.add(purchasesBtn);
-        centerPanel.add(transactionsBtn);
-        centerPanel.add(usersBtn);
+        // Search Bar
+        searchField.setPreferredSize(new Dimension(150, 30));
+        searchField.setForeground(Color.GRAY);
+        searchField.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.LIGHT_GRAY));
 
-        add(centerPanel);
+        searchField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (searchField.getText().equals("Search")) {
+                    searchField.setText("");
+                    searchField.setForeground(Color.BLACK);
+                }
+            }
 
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (searchField.getText().isEmpty()) {
+                    searchField.setForeground(Color.GRAY);
+                    searchField.setText("Search");
+                }
+            }
+        });
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(5, 10, 5, 10); // Adjust spacing
+        add(searchField, gbc);
+
+        // Dropdown Menu
+        for (String option : pageOptions) {
+            pageDropdown.addItem(option);
+        }
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.weightx = 0.2;
+        gbc.insets = new Insets(5, 0, 5, 10); // Adjust spacing
+        add(pageDropdown, gbc);
+
+        // Dropdown Action Listener
+        pageDropdown.addActionListener(e -> {
+            String selectedPage = (String) pageDropdown.getSelectedItem();
+            System.out.println("Navigating to: " + selectedPage);
+            // Implement navigation logic here
+        });
     }
 
-    public JButton getSuppliersBtn()
-    {
-        return suppliersBtn;
+    public JTextField getSearchField() {
+        return searchField;
     }
-    public JButton getCustomersBtn() {
-        return customersBtn;
-    }
-    public JButton getInventoryBtn() {
-        return inventoryBtn;
-    }
-    public JButton getPurchaseBtn() {
-        return purchasesBtn;
-    }
-    public JButton getTransactionsBtn() {
-        return transactionsBtn;
-    }
-    public JButton getUsersBtn() { return usersBtn; }
 
+    public JComboBox<String> getPageDropdown() {
+        return pageDropdown;
+    }
 }

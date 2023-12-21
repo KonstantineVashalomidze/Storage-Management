@@ -17,10 +17,8 @@ public class CustomersView
     private JPanel mainPanel;
     private JTable customersTable;
     private JScrollPane tableScrollPane;
-
     // Define column headers at the class level
     private final String[] columnHeaders = { "Customer ID", "Customer Name", "Contact Information" };
-
     // Create table for customers display
     private String[][] rowData = new String[][] {  };
     public CustomersView()
@@ -57,6 +55,14 @@ public class CustomersView
         setLocationRelativeTo(null);
         setVisible(true);
     }
+
+
+    // displays search result
+    public void displaySearchResult(List<Customer> customers)
+    {
+        displayCustomers(customers);
+    }
+
 
 
     public void displayCustomers(List<Customer> customers) {

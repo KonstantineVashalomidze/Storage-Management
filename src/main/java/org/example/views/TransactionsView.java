@@ -11,7 +11,6 @@ import java.util.List;
 
 public class TransactionsView extends JFrame {
     private JPanel mainPanel;
-    private JButton addButton, removeButton;
     private JTable transactionsTable;
     private JScrollPane tableScrollPane;
 
@@ -39,8 +38,6 @@ public class TransactionsView extends JFrame {
         setContentPane(mainPanel);
 
         // Create buttons
-        addButton = new JButton("Add Transaction");
-        removeButton = new JButton("Remove Transaction");
 
 
         transactionsTable = new JTable(rowData, columnHeaders);
@@ -53,8 +50,6 @@ public class TransactionsView extends JFrame {
         mainPanel.add(tableScrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
-        buttonPanel.add(addButton);
-        buttonPanel.add(removeButton);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
 
@@ -84,12 +79,6 @@ public class TransactionsView extends JFrame {
         return transactionsTable.getSelectedRow();
     }
 
-    public JButton getAddButton() {
-        return addButton;
-    }
 
-    public JButton getRemoveButton() {
-        return removeButton;
-    }
 
 }

@@ -19,9 +19,6 @@ public class TransactionsController implements Controller {
         this.transactionsView = transactionsView;
         this.transactionsService = transactionsService;
 
-        // Attach listeners to UI components
-        this.transactionsView.getAddButton().addActionListener(onAddClk());
-        this.transactionsView.getRemoveButton().addActionListener(onRemoveClk());
 
         loadTransactionsData();
 
@@ -33,27 +30,6 @@ public class TransactionsController implements Controller {
     }
 
 
-    private ActionListener onAddClk()
-    {
-        return (e) -> {
-
-        };
-    }
-
-    // ActionListener for removing an item
-    private ActionListener onRemoveClk()
-    {
-        return (e) -> {
-            // Get selected item
-            Transaction selectedTransaction = transactionsService.getTransactionAtIndex(transactionsView.getSelectedTransactionIndex());
-
-            // Remove the item via the service
-            transactionsService.removeTransaction(selectedTransaction);
-
-            // reload the data form database
-            loadTransactionsData();
-        };
-    }
 
 
 

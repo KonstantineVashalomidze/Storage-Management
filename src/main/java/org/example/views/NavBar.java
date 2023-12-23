@@ -2,13 +2,12 @@ package org.example.views;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class NavBar extends JPanel {
     private JTextField searchField = new JTextField("Search");
     private JComboBox<String> pageDropdown = new JComboBox<>();
     private String[] pageOptions = {"Inventory", "Customers", "Suppliers", "Purchases", "Transactions", "Users"};
+    private JButton charts = new JButton("Charts");
 
     public NavBar() {
         initComponents();
@@ -63,6 +62,14 @@ public class NavBar extends JPanel {
             System.out.println("Navigating to: " + selectedPage);
             // Implement navigation logic here
         });
+
+        // Charts Button
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.weightx = 0.1;
+        gbc.insets = new Insets(5, 0, 5, 10); // Adjust spacing
+        add(charts, gbc);
+
     }
 
     public JTextField getSearchField() {
@@ -71,5 +78,9 @@ public class NavBar extends JPanel {
 
     public JComboBox<String> getPageDropdown() {
         return pageDropdown;
+    }
+
+    public JButton getChartsButton() {
+        return charts;
     }
 }

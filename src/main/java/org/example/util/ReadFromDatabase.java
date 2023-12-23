@@ -23,7 +23,7 @@ public class ReadFromDatabase
         File customersFile = new File("customers.txt");
         File productDataFile = new File("ProductData.txt");
         File purchaseFile = new File("purchase.txt");
-        File salesTransactionFile = new File("SalesTransaction.txt");
+        File salesTransactionFile = new File("transactions.txt");
         File suppliersFile = new File("suppliers.txt");
         File userDataFile = new File("user_data.txt");
 

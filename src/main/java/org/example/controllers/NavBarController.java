@@ -22,6 +22,7 @@ public class NavBarController implements Controller {
 
         navBar.getPageDropdown().addActionListener(pageSelectionListener());
         navBar.getSearchField().addActionListener(searchFieldAct());
+        navBar.getChartsButton().addActionListener(chartsButtonListener());
     }
 
     private ActionListener searchFieldAct() {
@@ -47,6 +48,14 @@ public class NavBarController implements Controller {
                 List<User> users = DatabaseUtil.getInstance().searchUsers(searchTerm);
                 usersView.displayUsers(users);
             }
+        };
+    }
+
+    private ActionListener chartsButtonListener()
+    {
+        return (e) ->
+        {
+            EventQueue.invokeLater(ChartSelectionView::new);
         };
     }
 

@@ -21,19 +21,6 @@ public class RegistrationController implements Controller {
         attachRegisterActionListener();
         attachLoginActionListener();
 
-        // set maximum id that is currently in database for the user
-        setMaximumId();
-    }
-
-    private void setMaximumId() {
-        var maxId = 0;
-        for (User user : DatabaseUtil.getInstance().getAllTheUsers())
-        {
-            String userId = user.getUserId();
-            maxId = Math.max(maxId, Integer.parseInt(userId.substring(4)));
-
-        }
-        User.maxiMumUserID = maxId;
     }
 
     private void attachRegisterActionListener() {

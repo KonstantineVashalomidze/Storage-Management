@@ -1,4 +1,4 @@
-username | role | password | userId
+
 romani.todua | Admin | 123 | user1
 davit.mamrikishvli | Manager | 321 | user2
 nika.dolbaia | Staff | 333 | user3

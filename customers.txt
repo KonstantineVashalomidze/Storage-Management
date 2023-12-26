@@ -1,4 +1,4 @@
-Customer ID | Customer Name | Contact Information
+
 customer1 | Marybeth Kohler | (609) 417-8741 x020
 customer2 | Krystina Kessler | 956.955.4495
 customer3 | Clayton Prohaska | 1-821-173-8071

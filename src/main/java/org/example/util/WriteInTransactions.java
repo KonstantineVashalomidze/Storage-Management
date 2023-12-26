@@ -20,7 +20,6 @@ public class WriteInTransactions
         try {
 
 
-
             FileWriter fileWriter = new FileWriter("purchases.txt");
 
             Random random = new Random();

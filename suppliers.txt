@@ -1,4 +1,4 @@
-Supplier ID | Supplier Name | Contact Information
+
 supplier1 | Kunde, Pouros and Beahan | (008) 798-9173
 supplier2 | Kilback-Swaniawski | 1-240-305-5858 x03258
 supplier3 | Wyman, Little and Kozey | 1-465-296-6264

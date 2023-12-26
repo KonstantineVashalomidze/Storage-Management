@@ -146,14 +146,13 @@ public class ReadFromDatabase
                             ));
 
                     session.run("MATCH (na:Purchase {purchaseId: $purchaseId}), (nb:User {userId: $userId}) " +
-                                    "CREATE (na)-[:MADE_BY_USER]->(nb)",
+                                    "CREATE (na)-[:MADE_BY_USER {purchaseDate: $purchaseDate}]->(nb)",
                             Values.parameters(
                                     "purchaseId", purchase.getPurchaseID(),
-                                    "userId", purchase.getUserID()
+                                    "userId", purchase.getUserID(),
+                                    "purchaseDate", purchase.getPurchaseDate()
                             ));
                 }
-
-
 
 
 

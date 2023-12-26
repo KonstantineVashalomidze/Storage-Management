@@ -1,12 +1,14 @@
 package org.example.views;
 
+
+import org.example.views.charts.ChartBuilder;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class ChartSelectionView extends JFrame {
 
@@ -16,13 +18,16 @@ public class ChartSelectionView extends JFrame {
 
     public ChartSelectionView() {
         setTitle("Chart Selection");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
+
 
         // Initialize chart instances
         charts = new JFreeChart[]{
 //                org.example.charts.BarChartExample.createBarChart(),
                 // Initialize other chart instances here
+                ChartBuilder.monthlySalesChart(),
+                ChartBuilder.bestSellingProductsByUnitsSoldChart(),
+                ChartBuilder.bestProfitableProductsPieChart()
         };
 
         // Create a panel to hold the chart

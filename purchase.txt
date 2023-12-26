@@ -1,4 +1,4 @@
-Purchase ID | Purchase Date | Delivery Date | Quantity | Supplier Id | Product Id | User Id
+
 purchase1 | 2019-02-06 | 2019-10-31 | 71 | supplier2 | product157 | user1
 purchase2 | 2020-01-15 | 2020-04-15 | 82 | supplier2 | product158 | user1
 purchase3 | 2019-10-02 | 2021-05-30 | 2 | supplier2 | product159 | user1

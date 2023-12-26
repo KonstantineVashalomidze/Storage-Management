@@ -5,8 +5,11 @@ import org.example.models.Transaction;
 import org.neo4j.driver.*;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.types.Node;
+import org.neo4j.driver.util.Pair;
 
 import java.sql.Array;
+import java.time.LocalDate;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -570,9 +573,101 @@ public class DatabaseUtil {
 
 
 
+    public double totalSalesOverTime(String startingDate, String endingDate) {
+        double totalSales = 0.0;
+        try (Session session = getSession()) {
+            String query = "MATCH (t:Transaction) WHERE t.date >= $startingDate AND t.date <= $endingDate RETURN SUM(toInteger(t.totalCost)) AS totalSales";
+            Result result = session.run(query, Values.parameters("startingDate", startingDate, "endingDate", endingDate));
+            if (result.hasNext()) {
+                totalSales = result.next().get("totalSales").asDouble();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return totalSales;
+    }
 
 
 
+    public List<AbstractMap.SimpleEntry<String, Double>> totalSalesPerMonth() {
+        List<AbstractMap.SimpleEntry<String, Double>> salesPerMonth = new ArrayList<>();
+        try (Session session = getSession()) {
+            String query = "MATCH (t:Transaction) WITH t.date AS DateString, toFloat(t.totalCost) AS Quantity RETURN SUBSTRING(DateString, 0, 7) AS Month, SUM(Quantity) AS TotalSales ORDER BY Month";
+            Result result = session.run(query);
+            while (result.hasNext()) {
+                Record record = result.next();
+                salesPerMonth.add(new AbstractMap.SimpleEntry<>(record.get("Month").asString(), record.get("TotalSales").asDouble()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return salesPerMonth;
+    }
+
+    public List<AbstractMap.SimpleEntry<String, Double>> bestSellingProductsByUnitsSold() {
+        List<AbstractMap.SimpleEntry<String, Double>> bestSellingProducts = new ArrayList<>();
+        try (Session session = getSession()) {
+            String currentDate = LocalDate.now().toString();
+            String query = "MATCH (t:Transaction)-[:OF_PRODUCT]->(p:Product) WHERE t.date >= '2019-01-01' AND t.date <= '" + currentDate + "' WITH p, SUM((toFloat(t.totalCost) + toFloat(t.discountsApplied)) / toFloat(p.sellingPrice)) as unitsSold RETURN p.productName as Product, unitsSold ORDER BY unitsSold DESC LIMIT 10";
+            Result result = session.run(query);
+            while (result.hasNext()) {
+                Record record = result.next();
+                bestSellingProducts.add(new AbstractMap.SimpleEntry<>(record.get("Product").asString(), record.get("unitsSold").asDouble()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bestSellingProducts;
+    }
+
+
+    public List<AbstractMap.SimpleEntry<String, Double>> bestProfitableProducts() {
+        List<AbstractMap.SimpleEntry<String, Double>> profitableProducts = new ArrayList<>();
+        try (Session session = getSession()) {
+            String currentDate = LocalDate.now().toString();
+            String query = "MATCH (t:Transaction)-[:OF_PRODUCT]->(p:Product) WHERE t.date >= '2019-01-01' AND t.date <= '" + currentDate + "' WITH p, SUM(toFloat(t.totalCost) - toFloat(t.discountsApplied)) as totalNetSales, SUM((toFloat(t.totalCost) + toFloat(t.discountsApplied)) / toFloat(p.sellingPrice)) as unitsSold RETURN p.productName as Product, totalNetSales - (unitsSold * toFloat(p.costPrice)) as Profit ORDER BY Profit DESC LIMIT 10";
+            Result result = session.run(query);
+            while (result.hasNext()) {
+                Record record = result.next();
+                profitableProducts.add(new AbstractMap.SimpleEntry<>(record.get("Product").asString(), record.get("Profit").asDouble()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return profitableProducts;
+    }
+
+
+    public List<AbstractMap.SimpleEntry<String, Double>> averageDeliveryTime() {
+        List<AbstractMap.SimpleEntry<String, Double>> deliveryTimes = new ArrayList<>();
+        try (Session session = getSession()) {
+            String query = "MATCH (s:Supplier)<-[:FROM_SUPPLIER]-(p:Purchase) RETURN s.supplierName AS Supplier, AVG(duration.between(date(p.purchaseDate), date(p.deliveryDate)).days) AS AverageDeliveryTime";
+            Result result = session.run(query);
+            while (result.hasNext()) {
+                Record record = result.next();
+                deliveryTimes.add(new AbstractMap.SimpleEntry<>(record.get("Supplier").asString(), record.get("AverageDeliveryTime").asDouble()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return deliveryTimes;
+    }
+
+
+    public List<AbstractMap.SimpleEntry<String, Double>> totalCostPerSupplier() {
+        List<AbstractMap.SimpleEntry<String, Double>> totalCosts = new ArrayList<>();
+        try (Session session = getSession()) {
+            String query = "MATCH (s:Supplier)<-[:FROM_SUPPLIER]-(p:Purchase)-[:THE_PRODUCT]->(pr:Product) RETURN s.supplierID AS Supplier, SUM(toInteger(p.quantity) * toFloat(pr.costPrice)) AS TotalCost ORDER BY TotalCost";
+            Result result = session.run(query);
+            while (result.hasNext()) {
+                Record record = result.next();
+                totalCosts.add(new AbstractMap.SimpleEntry<>(record.get("Supplier").asString(), record.get("TotalCost").asDouble()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return totalCosts;
+    }
 
 
 

@@ -1,6 +1,7 @@
 package org.example.views;
 
 import org.example.views.view_components.BetterFrame;
+import org.example.views.view_components.BetterScrollPane;
 import org.example.views.view_components.BetterTable;
 import org.example.controllers.NavBarController;
 import org.example.models.Transaction;
@@ -13,7 +14,7 @@ import java.util.List;
 public class TransactionsView extends BetterFrame {
     private JPanel mainPanel;
     private BetterTable transactionsTable;
-    private JScrollPane tableScrollPane;
+    private BetterScrollPane tableScrollPane;
 
     // Define column headers at the class level
     private final String[] columnHeaders = { "Transaction ID", "Date", "Total Cost", "Customer ID", "Product ID", "Discounts/Promotions Applied" };
@@ -42,7 +43,7 @@ public class TransactionsView extends BetterFrame {
 
 
         transactionsTable = new BetterTable(rowData, columnHeaders);
-        tableScrollPane = new JScrollPane(transactionsTable);
+        tableScrollPane = new BetterScrollPane(transactionsTable);
 
         mainPanel.add(navBar, BorderLayout.NORTH);
 

@@ -2,6 +2,7 @@ package org.example.views;
 
 import org.example.views.view_components.BetterButton;
 import org.example.views.view_components.BetterFrame;
+import org.example.views.view_components.BetterScrollPane;
 import org.example.views.view_components.BetterTable;
 import org.example.controllers.NavBarController;
 import org.example.models.Purchase;
@@ -17,7 +18,7 @@ public class PurchasesView
     private JPanel mainPanel;
     private BetterButton addButton, removeButton;
     private BetterTable purchasesTable;
-    private JScrollPane tableScrollPane;
+    private BetterScrollPane tableScrollPane;
 
     // Define column headers at the class level
     private final String[] columnHeaders = { "Purchase ID", "Purchase Date", "Delivery Date", "Quantity", "Supplier Id", "Product Id", "User Id" };
@@ -48,7 +49,7 @@ public class PurchasesView
 
 
         purchasesTable = new BetterTable(rowData, columnHeaders);
-        tableScrollPane = new JScrollPane(purchasesTable);
+        tableScrollPane = new BetterScrollPane(purchasesTable);
 
         mainPanel.add(navBar, BorderLayout.NORTH);
 

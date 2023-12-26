@@ -1,6 +1,7 @@
 package org.example.views;
 
 import org.example.views.view_components.BetterFrame;
+import org.example.views.view_components.BetterScrollPane;
 import org.example.views.view_components.BetterTable;
 import org.example.controllers.NavBarController;
 import org.example.models.User;
@@ -15,7 +16,7 @@ public class UsersView extends BetterFrame {
 
     private JPanel mainPanel;
     private BetterTable usersTable;
-    private JScrollPane tableScrollPane;
+    private BetterScrollPane tableScrollPane;
 
     // Define column headers at the class level
     private final String[] columnHeaders = { "Username", "Role", "Password", "User id" };
@@ -47,7 +48,7 @@ public class UsersView extends BetterFrame {
         setContentPane(mainPanel);
 
         usersTable = new BetterTable(rowData, columnHeaders);
-        tableScrollPane = new JScrollPane(usersTable);
+        tableScrollPane = new BetterScrollPane(usersTable);
 
         mainPanel.add(navBar, BorderLayout.NORTH);
 

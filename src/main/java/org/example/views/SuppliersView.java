@@ -1,6 +1,7 @@
 package org.example.views;
 
 import org.example.views.view_components.BetterFrame;
+import org.example.views.view_components.BetterScrollPane;
 import org.example.views.view_components.BetterTable;
 import org.example.controllers.NavBarController;
 import org.example.models.Supplier;
@@ -15,7 +16,7 @@ public class SuppliersView
 {
     private JPanel mainPanel;
     private BetterTable suppliersTable;
-    private JScrollPane tableScrollPane;
+    private BetterScrollPane tableScrollPane;
 
     // Define column headers at the class level
     private final String[] columnHeaders = { "Supplier ID", "Supplier Name", "Contact Information" };
@@ -48,7 +49,7 @@ public class SuppliersView
 
 
         suppliersTable = new BetterTable(rowData, columnHeaders);
-        tableScrollPane = new JScrollPane(suppliersTable);
+        tableScrollPane = new BetterScrollPane(suppliersTable);
 
         mainPanel.add(navBar, BorderLayout.NORTH);
 

@@ -1,14 +1,18 @@
 package org.example.views;
 
+import org.example.views.view_components.BetterButton;
+import org.example.views.view_components.BetterPasswordField;
+import org.example.views.view_components.BetterTextField;
+
 import javax.swing.*;
 import java.awt.*;
 
 
 public class LoginView extends JFrame {
-    private JTextField usernameField;
-    private JPasswordField passwordField;
+    private BetterTextField usernameField;
+    private BetterPasswordField passwordField;
 
-    private JButton loginButton, registrationButton;
+    private BetterButton loginButton, registrationButton;
 
     public LoginView() {
 
@@ -23,19 +27,19 @@ public class LoginView extends JFrame {
         JLabel usernameLabel = new JLabel("Username:");
         panel.add(usernameLabel);
 
-        usernameField = new JTextField();
+        usernameField = new BetterTextField();
         panel.add(usernameField);
 
         JLabel passwordLabel = new JLabel("Password:");
         panel.add(passwordLabel);
 
-        passwordField = new JPasswordField();
+        passwordField = new BetterPasswordField();
         panel.add(passwordField);
 
-        loginButton = new JButton("Login");
+        loginButton = new BetterButton("Login");
         panel.add(loginButton);
 
-        JButton cancelButton = new JButton("Clear");
+        BetterButton cancelButton = new BetterButton("Clear");
         cancelButton.addActionListener(e -> {
             // Handle cancel button click event
             usernameField.setText("");
@@ -46,7 +50,7 @@ public class LoginView extends JFrame {
         registrationButton = createRegisterButton();
         panel.add(registrationButton);
 
-        JButton exitButton = createExitButton();
+        BetterButton exitButton = createExitButton();
         panel.add(exitButton);
 
 
@@ -57,34 +61,34 @@ public class LoginView extends JFrame {
     }
 
     // A method to create button for exit from the window
-    private JButton createExitButton() {
-        JButton exitButton = new JButton("Exit");
+    private BetterButton createExitButton() {
+        BetterButton exitButton = new BetterButton("Exit");
         exitButton.addActionListener(e -> dispose());
         return exitButton;
     }
 
     // Add a method to create a button for navigating to the LoginView
-    private JButton createRegisterButton() {
-        return new JButton("Back to Registration");
+    private BetterButton createRegisterButton() {
+        return new BetterButton("Back to Registration");
     }
 
 
 
-    public JButton getRegistrationButton() {
+    public BetterButton getRegistrationButton() {
         return registrationButton;
     }
 
-    public JButton getLoginButton() {
+    public BetterButton getLoginButton() {
         // Returns the login button
         return loginButton;
     }
 
-    public JTextField getUsername() {
+    public BetterTextField getUsername() {
         // Returns the text entered the username field
         return usernameField;
     }
 
-    public JPasswordField getPassword() {
+    public BetterPasswordField getPassword() {
         // Returns the text entered the password field
         return passwordField;
     }

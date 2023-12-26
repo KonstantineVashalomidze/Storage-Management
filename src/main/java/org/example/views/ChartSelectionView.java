@@ -2,6 +2,8 @@ package org.example.views;
 
 
 import org.example.views.charts.ChartBuilder;
+import org.example.views.view_components.BetterButton;
+import org.example.views.view_components.BetterFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 
@@ -10,7 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class ChartSelectionView extends JFrame {
+public class ChartSelectionView extends BetterFrame {
 
     private JPanel chartPanel;
     private int currentChartIndex;
@@ -27,7 +29,8 @@ public class ChartSelectionView extends JFrame {
                 // Initialize other chart instances here
                 ChartBuilder.monthlySalesChart(),
                 ChartBuilder.bestSellingProductsByUnitsSoldChart(),
-                ChartBuilder.bestProfitableProductsPieChart()
+                ChartBuilder.bestProfitableProductsPieChart(),
+                ChartBuilder.averageDeliveryTimeHistogram()
         };
 
         // Create a panel to hold the chart
@@ -36,10 +39,10 @@ public class ChartSelectionView extends JFrame {
         displayChart(charts[currentChartIndex]);
 
         // Create buttons
-        JButton leftButton = new JButton("<");
+        BetterButton leftButton = new BetterButton("<");
         leftButton.addActionListener(e -> showPreviousChart());
 
-        JButton rightButton = new JButton(">");
+        BetterButton rightButton = new BetterButton(">");
         rightButton.addActionListener(e -> showNextChart());
 
         // Add buttons to a panel

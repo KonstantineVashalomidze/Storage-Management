@@ -1,19 +1,18 @@
 package org.example.views;
 
-import org.example.models.User;
-import org.example.services.AuthenticationService;
-import org.example.util.DatabaseUtil;
+
+import org.example.views.view_components.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class RegistrationView extends JFrame {
-    private JTextField usernameField;
-    private JPasswordField passwordField, confirmPasswordField;
-    private JComboBox<String> roleComboBox;
+public class RegistrationView extends BetterFrame {
+    private BetterTextField usernameField;
+    private BetterPasswordField passwordField, confirmPasswordField;
+    private BetterComboBox<String> roleComboBox;
 
-    private JButton registerButton, loginButton;
+    private BetterButton registerButton, loginButton;
 
     public RegistrationView() {
         setTitle("User Registration");
@@ -24,21 +23,21 @@ public class RegistrationView extends JFrame {
         panel.setLayout(new GridLayout(6, 2, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        addTextFieldWithLabel("Username:", usernameField = new JTextField(), panel);
-        addPasswordFieldWithLabel("Password:", passwordField = new JPasswordField(), panel);
-        addPasswordFieldWithLabel("Confirm Password:", confirmPasswordField = new JPasswordField(), panel);
+        addTextFieldWithLabel("Username:", usernameField = new BetterTextField(), panel);
+        addPasswordFieldWithLabel("Password:", passwordField = new BetterPasswordField(), panel);
+        addPasswordFieldWithLabel("Confirm Password:", confirmPasswordField = new BetterPasswordField(), panel);
 
         // Role selection
         panel.add(new JLabel("Role:"));
         String[] roles = {"Admin", "Manager", "Staff"};
-        roleComboBox = new JComboBox<>(roles);
+        roleComboBox = new BetterComboBox<>(roles);
         panel.add(roleComboBox);
 
         // Register and Clear buttons
-        registerButton = new JButton("Register");
+        registerButton = new BetterButton("Register");
         panel.add(registerButton);
 
-        JButton cancelButton = new JButton("Clear");
+        BetterButton cancelButton = new BetterButton("Clear");
         cancelButton.addActionListener(e -> clearFields());
         panel.add(cancelButton);
 
@@ -47,7 +46,7 @@ public class RegistrationView extends JFrame {
         panel.add(loginButton);
 
         // Exit Button
-        JButton exitButton = createExitButton();
+        BetterButton exitButton = createExitButton();
         panel.add(exitButton);
 
         add(panel);
@@ -57,21 +56,21 @@ public class RegistrationView extends JFrame {
     }
 
     // A method to create button for exit from the window
-    private JButton createExitButton() {
-        JButton exitButton = new JButton("Exit");
+    private BetterButton createExitButton() {
+        BetterButton exitButton = new BetterButton("Exit");
         exitButton.addActionListener(e -> dispose());
         return exitButton;
     }
 
     // Add a method to create a button for navigating to the LoginView
-    private JButton createLoginButton() {
-        return new JButton("Back to Login");
+    private BetterButton createLoginButton() {
+        return new BetterButton("Back to Login");
     }
 
 
 
     // Getter methods for RegistrationController
-    public JButton getLoginButton()
+    public BetterButton getLoginButton()
     {
         return loginButton;
     }
@@ -105,20 +104,20 @@ public class RegistrationView extends JFrame {
         roleComboBox.setSelectedIndex(0);
     }
 
-    private void addTextFieldWithLabel(String labelText, JTextField textField, JPanel panel) {
+    private void addTextFieldWithLabel(String labelText, BetterTextField textField, JPanel panel) {
         JLabel label = new JLabel(labelText);
         panel.add(label);
         panel.add(textField);
     }
 
-    private void addPasswordFieldWithLabel(String labelText, JPasswordField passwordField, JPanel panel) {
+    private void addPasswordFieldWithLabel(String labelText, BetterPasswordField passwordField, JPanel panel) {
         JLabel label = new JLabel(labelText);
         panel.add(label);
         panel.add(passwordField);
     }
 
 
-    public JButton getRegisterButton() {
+    public BetterButton getRegisterButton() {
         return registerButton;
     }
 }

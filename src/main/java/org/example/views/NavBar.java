@@ -1,13 +1,16 @@
 package org.example.views;
 
+import org.example.views.view_components.BetterButton;
+import org.example.views.view_components.BetterComboBox;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class NavBar extends JPanel {
     private JTextField searchField = new JTextField("Search");
-    private JComboBox<String> pageDropdown = new JComboBox<>();
+    private BetterComboBox<String> pageDropdown = new BetterComboBox<>();
     private String[] pageOptions = {"Inventory", "Customers", "Suppliers", "Purchases", "Transactions", "Users"};
-    private JButton charts = new JButton("Charts");
+    private BetterButton charts = new BetterButton("Charts");
 
     public NavBar() {
         initComponents();
@@ -76,11 +79,11 @@ public class NavBar extends JPanel {
         return searchField;
     }
 
-    public JComboBox<String> getPageDropdown() {
+    public BetterComboBox<String> getPageDropdown() {
         return pageDropdown;
     }
 
-    public JButton getChartsButton() {
+    public BetterButton getChartsButton() {
         return charts;
     }
 }

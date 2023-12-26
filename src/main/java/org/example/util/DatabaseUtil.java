@@ -654,20 +654,7 @@ public class DatabaseUtil {
     }
 
 
-    public List<AbstractMap.SimpleEntry<String, Double>> totalCostPerSupplier() {
-        List<AbstractMap.SimpleEntry<String, Double>> totalCosts = new ArrayList<>();
-        try (Session session = getSession()) {
-            String query = "MATCH (s:Supplier)<-[:FROM_SUPPLIER]-(p:Purchase)-[:THE_PRODUCT]->(pr:Product) RETURN s.supplierID AS Supplier, SUM(toInteger(p.quantity) * toFloat(pr.costPrice)) AS TotalCost ORDER BY TotalCost";
-            Result result = session.run(query);
-            while (result.hasNext()) {
-                Record record = result.next();
-                totalCosts.add(new AbstractMap.SimpleEntry<>(record.get("Supplier").asString(), record.get("TotalCost").asDouble()));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return totalCosts;
-    }
+
 
 
 

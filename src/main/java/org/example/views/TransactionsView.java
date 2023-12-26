@@ -1,7 +1,8 @@
 package org.example.views;
 
+import org.example.views.view_components.BetterFrame;
+import org.example.views.view_components.BetterTable;
 import org.example.controllers.NavBarController;
-import org.example.models.Purchase;
 import org.example.models.Transaction;
 
 import javax.swing.*;
@@ -9,9 +10,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class TransactionsView extends JFrame {
+public class TransactionsView extends BetterFrame {
     private JPanel mainPanel;
-    private JTable transactionsTable;
+    private BetterTable transactionsTable;
     private JScrollPane tableScrollPane;
 
     // Define column headers at the class level
@@ -40,7 +41,7 @@ public class TransactionsView extends JFrame {
         // Create buttons
 
 
-        transactionsTable = new JTable(rowData, columnHeaders);
+        transactionsTable = new BetterTable(rowData, columnHeaders);
         tableScrollPane = new JScrollPane(transactionsTable);
 
         mainPanel.add(navBar, BorderLayout.NORTH);

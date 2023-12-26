@@ -5,6 +5,7 @@ import org.example.services.*;
 import org.example.util.DatabaseUtil;
 import org.example.views.NavBar;
 import org.example.views.*;
+import org.example.views.view_components.BetterComboBox;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,7 +63,7 @@ public class NavBarController implements Controller {
 
     private ActionListener pageSelectionListener() {
         return e -> {
-            JComboBox<String> cb = (JComboBox<String>) e.getSource();
+            BetterComboBox<String> cb = (BetterComboBox<String>) e.getSource();
             String selectedPage = (String) cb.getSelectedItem();
             switch (Objects.requireNonNull(selectedPage)) {
                 case "Inventory" -> openInventoryView();

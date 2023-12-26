@@ -1,10 +1,9 @@
 package org.example.views;
 
-import org.example.controllers.CustomersController;
+import org.example.views.view_components.BetterFrame;
+import org.example.views.view_components.BetterTable;
 import org.example.controllers.NavBarController;
-import org.example.models.Customer;
 import org.example.models.Supplier;
-import org.example.services.CustomersService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,10 +11,10 @@ import java.awt.*;
 import java.util.List;
 
 public class SuppliersView
-    extends JFrame
+    extends BetterFrame
 {
     private JPanel mainPanel;
-    private JTable suppliersTable;
+    private BetterTable suppliersTable;
     private JScrollPane tableScrollPane;
 
     // Define column headers at the class level
@@ -48,7 +47,7 @@ public class SuppliersView
         setContentPane(mainPanel);
 
 
-        suppliersTable = new JTable(rowData, columnHeaders);
+        suppliersTable = new BetterTable(rowData, columnHeaders);
         tableScrollPane = new JScrollPane(suppliersTable);
 
         mainPanel.add(navBar, BorderLayout.NORTH);

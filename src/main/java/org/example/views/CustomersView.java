@@ -1,10 +1,9 @@
 package org.example.views;
 
-import org.example.controllers.CustomersController;
+import org.example.views.view_components.BetterFrame;
+import org.example.views.view_components.BetterTable;
 import org.example.controllers.NavBarController;
 import org.example.models.Customer;
-import org.example.models.Product;
-import org.example.services.CustomersService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,10 +11,10 @@ import java.awt.*;
 import java.util.List;
 
 public class CustomersView 
-    extends JFrame
+    extends BetterFrame
 {
     private JPanel mainPanel;
-    private JTable customersTable;
+    private BetterTable customersTable;
     private JScrollPane tableScrollPane;
     // Define column headers at the class level
     private final String[] columnHeaders = { "Customer ID", "Customer Name", "Contact Information" };
@@ -39,11 +38,10 @@ public class CustomersView
         mainPanel = new JPanel(new BorderLayout());
         setContentPane(mainPanel);
 
-        customersTable = new JTable(rowData, columnHeaders);
+        customersTable = new BetterTable(rowData, columnHeaders);
         tableScrollPane = new JScrollPane(customersTable);
 
         mainPanel.add(navBar, BorderLayout.NORTH);
-
 
         // Add components to the main panel
         mainPanel.add(tableScrollPane, BorderLayout.CENTER);

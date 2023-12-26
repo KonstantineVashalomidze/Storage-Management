@@ -1,7 +1,8 @@
 package org.example.views;
 
+import org.example.views.view_components.BetterFrame;
+import org.example.views.view_components.BetterTable;
 import org.example.controllers.NavBarController;
-import org.example.models.Supplier;
 import org.example.models.User;
 
 import javax.swing.*;
@@ -9,11 +10,11 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class UsersView extends JFrame {
+public class UsersView extends BetterFrame {
 
 
     private JPanel mainPanel;
-    private JTable usersTable;
+    private BetterTable usersTable;
     private JScrollPane tableScrollPane;
 
     // Define column headers at the class level
@@ -45,7 +46,7 @@ public class UsersView extends JFrame {
         mainPanel = new JPanel(new BorderLayout());
         setContentPane(mainPanel);
 
-        usersTable = new JTable(rowData, columnHeaders);
+        usersTable = new BetterTable(rowData, columnHeaders);
         tableScrollPane = new JScrollPane(usersTable);
 
         mainPanel.add(navBar, BorderLayout.NORTH);

@@ -1,7 +1,9 @@
 package org.example.views;
 
+import org.example.views.view_components.BetterButton;
+import org.example.views.view_components.BetterFrame;
+import org.example.views.view_components.BetterTable;
 import org.example.controllers.NavBarController;
-import org.example.controllers.PurchasesController;
 import org.example.models.Purchase;
 
 import javax.swing.*;
@@ -10,11 +12,11 @@ import java.awt.*;
 import java.util.List;
 
 public class PurchasesView 
-    extends JFrame
+    extends BetterFrame
 {
     private JPanel mainPanel;
-    private JButton addButton, removeButton;
-    private JTable purchasesTable;
+    private BetterButton addButton, removeButton;
+    private BetterTable purchasesTable;
     private JScrollPane tableScrollPane;
 
     // Define column headers at the class level
@@ -41,11 +43,11 @@ public class PurchasesView
         setContentPane(mainPanel);
 
         // Create buttons
-        addButton = new JButton("Add Purchase");
-        removeButton = new JButton("Remove Purchase");
+        addButton = new BetterButton("Add Purchase");
+        removeButton = new BetterButton("Remove Purchase");
 
 
-        purchasesTable = new JTable(rowData, columnHeaders);
+        purchasesTable = new BetterTable(rowData, columnHeaders);
         tableScrollPane = new JScrollPane(purchasesTable);
 
         mainPanel.add(navBar, BorderLayout.NORTH);
@@ -87,11 +89,11 @@ public class PurchasesView
         return purchasesTable.getSelectedRow();
     }
 
-    public JButton getAddButton() {
+    public BetterButton getAddButton() {
         return addButton;
     }
 
-    public JButton getRemoveButton() {
+    public BetterButton getRemoveButton() {
         return removeButton;
     }
 

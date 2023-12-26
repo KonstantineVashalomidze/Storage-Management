@@ -1,5 +1,7 @@
 package org.example.views;
 
+import org.example.views.view_components.BetterFrame;
+import org.example.views.view_components.BetterTable;
 import org.example.controllers.InventoryController;
 import org.example.controllers.NavBarController;
 import org.example.models.Product;
@@ -10,10 +12,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class InventoryView extends JFrame {
+public class InventoryView extends BetterFrame {
     // Components for Inventory Management Screen
     private JPanel mainPanel;
-    private JTable inventoryTable;
+    private BetterTable inventoryTable;
     private JScrollPane tableScrollPane;
 
     // Define column headers at the class level
@@ -46,7 +48,7 @@ public class InventoryView extends JFrame {
         mainPanel = new JPanel(new BorderLayout());
         setContentPane(mainPanel);
 
-        inventoryTable = new JTable(rowData, columnHeaders);
+        inventoryTable = new BetterTable(rowData, columnHeaders);
         tableScrollPane = new JScrollPane(inventoryTable);
 
         mainPanel.add(navBar, BorderLayout.NORTH);

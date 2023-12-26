@@ -22,6 +22,33 @@ import java.util.List;
 public class ChartBuilder
 {
 
+
+
+
+    public static JFreeChart averageDeliveryTimeHistogram()
+    {
+        List<AbstractMap.SimpleEntry<String, Double>> deliveryTimeData = DatabaseUtil.getInstance().averageDeliveryTime();
+
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (AbstractMap.SimpleEntry<String, Double> entry : deliveryTimeData) {
+            dataset.addValue(entry.getValue(), "Delivery Time", entry.getKey());
+        }
+
+        JFreeChart barChart = ChartFactory.createBarChart(
+                "Average Delivery Time per Supplier",
+                "Supplier",
+                "Average Delivery Time (Days)",
+                dataset,
+                PlotOrientation.HORIZONTAL,
+                true,
+                true,
+                false);
+
+
+
+        return barChart;
+    }
+
     public static JFreeChart bestProfitableProductsPieChart()
     {
         List<AbstractMap.SimpleEntry<String, Double>> productData = DatabaseUtil.getInstance().bestProfitableProducts();

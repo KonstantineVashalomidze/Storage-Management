@@ -4,6 +4,7 @@ import org.example.services.UsersService;
 import org.example.views.UsersView;
 
 public class UsersController
+    implements Controller
 {
 
     private UsersService usersService;
@@ -24,5 +25,11 @@ public class UsersController
         usersView.displayUsers(users);
     }
 
+    public UsersService getUsersService() {
+        return usersService;
+    }
 
+    public UsersView getUsersView() {
+        return usersView;
+    }
 }

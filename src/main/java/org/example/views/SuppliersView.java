@@ -12,9 +12,8 @@ import java.awt.*;
 import java.util.List;
 
 public class SuppliersView
-    extends BetterFrame
+    extends JPanel
 {
-    private JPanel mainPanel;
     private BetterTable suppliersTable;
     private BetterScrollPane tableScrollPane;
 
@@ -34,35 +33,25 @@ public class SuppliersView
     }
 
     private void initializeUI() {
-        setTitle("Suppliers Management");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
 
-        // Create navbar
-        var navBar = new NavBar();
-        var navBarController = new NavBarController(navBar, this);
+
 
 
         // Initialize main panel and layout
-        mainPanel = new JPanel(new BorderLayout());
-        setContentPane(mainPanel);
+        setLayout(new BorderLayout());
 
 
         suppliersTable = new BetterTable(rowData, columnHeaders);
         tableScrollPane = new BetterScrollPane(suppliersTable);
 
-        mainPanel.add(navBar, BorderLayout.NORTH);
 
 
         // Add components to the main panel
-        mainPanel.add(tableScrollPane, BorderLayout.CENTER);
+        add(tableScrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+        add(buttonPanel, BorderLayout.SOUTH);
 
-
-        setLocationRelativeTo(null);
-        setVisible(true);
     }
 
 

@@ -8,10 +8,7 @@ import org.example.util.DatabaseUtil;
 import org.example.views.RegistrationView;
 
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.awt.*;
-import java.util.AbstractMap;
-import java.util.Arrays;
 
 public class Main
 {

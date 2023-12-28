@@ -13,9 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class InventoryView extends BetterFrame {
+public class InventoryView extends JPanel {
     // Components for Inventory Management Screen
-    private JPanel mainPanel;
     private BetterTable inventoryTable;
     private BetterScrollPane tableScrollPane;
 
@@ -36,41 +35,24 @@ public class InventoryView extends BetterFrame {
 
 
     private void initializeUI() {
-        setTitle("Inventory Management");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
-
-        // Create navbar
-        var navBar = new NavBar();
-        var navBarController = new NavBarController(navBar, this);
-
-        // Initialize main panel and layout
-        mainPanel = new JPanel(new BorderLayout());
-        setContentPane(mainPanel);
 
         inventoryTable = new BetterTable(rowData, columnHeaders);
         tableScrollPane = new BetterScrollPane(inventoryTable);
 
-        mainPanel.add(navBar, BorderLayout.NORTH);
-
+        setLayout(new BorderLayout());
 
         // Add components to the main panel
-        mainPanel.add(tableScrollPane, BorderLayout.CENTER);
+        add(tableScrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+        add(buttonPanel, BorderLayout.SOUTH);
 
-        setLocationRelativeTo(null);
-        setVisible(true);
+
     }
 
 
 
-    public static void main(String[] args) {
-        var invView = new InventoryView();
-        var invService = new InventoryService();
-        var invController = new InventoryController(invView, invService);
-    }
+
 
 
     public void displayItems(List<Product> products) {

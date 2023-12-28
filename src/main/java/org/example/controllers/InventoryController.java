@@ -31,7 +31,11 @@ public class InventoryController implements Controller {
     }
 
 
+    public InventoryView getInventoryView() {
+        return inventoryView;
+    }
 
-
-
+    public InventoryService getInventoryService() {
+        return inventoryService;
+    }
 }

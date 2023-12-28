@@ -5,10 +5,7 @@ package org.example.controllers;
 import org.example.models.User;
 import org.example.services.AuthenticationService;
 import org.example.services.InventoryService;
-import org.example.views.InventoryView;
-import org.example.views.NavBar;
-import org.example.views.LoginView;
-import org.example.views.RegistrationView;
+import org.example.views.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,11 +44,7 @@ public class LoginController implements Controller {
                 // Authentication successful
                 JOptionPane.showMessageDialog(loginView, "Login Successful!");
                 // Add logic to proceed after successful login (e.g., open main dashboard)
-                EventQueue.invokeLater(() -> {
-                    var inventoryView = new InventoryView();
-                    var inventoryService = new InventoryService();
-                    var inventoryController = new InventoryController(inventoryView, inventoryService);
-                });
+                EventQueue.invokeLater(MainWindow::new);
                 loginView.dispose();
             } else {
                 // Authentication failed

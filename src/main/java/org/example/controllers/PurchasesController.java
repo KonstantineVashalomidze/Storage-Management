@@ -58,6 +58,11 @@ public class PurchasesController
         };
     }
 
+    public PurchasesView getPurchasesView() {
+        return purchasesView;
+    }
 
-
+    public PurchasesService getPurchaseService() {
+        return purchaseService;
+    }
 }

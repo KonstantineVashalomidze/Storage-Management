@@ -28,6 +28,11 @@ public class SuppliersController
         suppliersView.displaySuppliers(suppliers);
     }
 
+    public SuppliersView getSuppliersView() {
+        return suppliersView;
+    }
 
-
+    public SuppliersService getSuppliersService() {
+        return suppliersService;
+    }
 }

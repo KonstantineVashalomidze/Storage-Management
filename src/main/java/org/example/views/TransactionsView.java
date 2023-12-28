@@ -11,8 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class TransactionsView extends BetterFrame {
-    private JPanel mainPanel;
+public class TransactionsView extends JPanel {
     private BetterTable transactionsTable;
     private BetterScrollPane tableScrollPane;
 
@@ -26,37 +25,23 @@ public class TransactionsView extends BetterFrame {
         initializeUI();
     }
     private void initializeUI() {
-        setTitle("Transaction Management");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
-
-        // Create navbar
-        var navBar = new NavBar();
-        var navBarController = new NavBarController(navBar, this);
 
 
         // Initialize main panel and layout
-        mainPanel = new JPanel(new BorderLayout());
-        setContentPane(mainPanel);
-
-        // Create buttons
-
+        setLayout(new BorderLayout());
 
         transactionsTable = new BetterTable(rowData, columnHeaders);
         tableScrollPane = new BetterScrollPane(transactionsTable);
 
-        mainPanel.add(navBar, BorderLayout.NORTH);
 
 
         // Add components to the main panel
-        mainPanel.add(tableScrollPane, BorderLayout.CENTER);
+        add(tableScrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+        add(buttonPanel, BorderLayout.SOUTH);
 
 
-        setLocationRelativeTo(null);
-        setVisible(true);
     }
 
 

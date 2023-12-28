@@ -30,7 +30,11 @@ public class TransactionsController implements Controller {
     }
 
 
+    public TransactionsView getTransactionsView() {
+        return transactionsView;
+    }
 
-
-
+    public TransactionsService getTransactionsService() {
+        return transactionsService;
+    }
 }

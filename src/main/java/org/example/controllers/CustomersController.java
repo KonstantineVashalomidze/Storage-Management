@@ -8,6 +8,7 @@ import org.example.views.CustomersView;
 import java.awt.event.ActionListener;
 
 public class CustomersController
+    implements Controller
 {
     private CustomersView customersView;
     private CustomersService customersService;
@@ -26,5 +27,11 @@ public class CustomersController
         customersView.displayCustomers(customers);
     }
 
+    public CustomersView getCustomersView() {
+        return customersView;
+    }
 
+    public CustomersService getCustomersService() {
+        return customersService;
+    }
 }

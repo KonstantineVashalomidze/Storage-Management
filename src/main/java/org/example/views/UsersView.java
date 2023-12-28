@@ -11,10 +11,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class UsersView extends BetterFrame {
+public class UsersView extends JPanel {
 
 
-    private JPanel mainPanel;
     private BetterTable usersTable;
     private BetterScrollPane tableScrollPane;
 
@@ -34,34 +33,23 @@ public class UsersView extends BetterFrame {
     }
 
     private void initializeUI() {
-        setTitle("User Management");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
 
-        // Create navbar
-        var navBar = new NavBar();
-        var navBarController = new NavBarController(navBar, this);
+
 
 
         // Initialize main panel and layout
-        mainPanel = new JPanel(new BorderLayout());
-        setContentPane(mainPanel);
+        setLayout(new BorderLayout());
 
         usersTable = new BetterTable(rowData, columnHeaders);
         tableScrollPane = new BetterScrollPane(usersTable);
 
-        mainPanel.add(navBar, BorderLayout.NORTH);
-
-
         // Add components to the main panel
-        mainPanel.add(tableScrollPane, BorderLayout.CENTER);
+        add(tableScrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+        add(buttonPanel, BorderLayout.SOUTH);
 
 
-        setLocationRelativeTo(null);
-        setVisible(true);
     }
 
 

@@ -43,7 +43,7 @@ public class MainWindow
 
 
     public static void main(String[] args) {
-
+        EventQueue.invokeLater(MainWindow::new);
     }
 
 

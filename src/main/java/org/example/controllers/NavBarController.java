@@ -21,7 +21,8 @@ public class NavBarController implements Controller {
     // inventoryController, customersController, suppliersController, purchasesController, transactionsController, usersController
     private List<Controller> pageControllers;
 
-    private ChartSelectionView chartWindow;
+    private ChartSelectionView chartSelectionView;
+
     private JPanel currentPage;
 
     // indicates if the window is full screen
@@ -129,6 +130,9 @@ public class NavBarController implements Controller {
         var usersService = new UsersService();
         var usersController = new UsersController(usersView, usersService);
 
+        // create charts page
+        chartSelectionView = new ChartSelectionView();
+
 
         pageControllers = List.of(inventoryController,
                 customersController,
@@ -146,8 +150,8 @@ public class NavBarController implements Controller {
         {
             EventQueue.invokeLater(() ->
             {
-                chartWindow = new ChartSelectionView();
-                validateWindowSize(chartWindow);
+                mainWindow.setCurrentPage(chartSelectionView);
+                mainWindow.setTitle("Charts Management");
             });
         };
     }

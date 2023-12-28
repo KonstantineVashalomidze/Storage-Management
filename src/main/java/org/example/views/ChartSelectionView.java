@@ -12,20 +12,16 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class ChartSelectionView extends BetterFrame {
+public class ChartSelectionView extends JPanel {
 
     private JPanel chartPanel;
     private int currentChartIndex;
     private JFreeChart[] charts; // Store instances of different charts
 
     public ChartSelectionView() {
-        setTitle("Chart Selection");
-        setSize(600, 400);
-
 
         // Initialize chart instances
         charts = new JFreeChart[]{
-//                org.example.charts.BarChartExample.createBarChart(),
                 // Initialize other chart instances here
                 ChartBuilder.monthlySalesChart(),
                 ChartBuilder.bestSellingProductsByUnitsSoldChart(),
@@ -52,13 +48,9 @@ public class ChartSelectionView extends BetterFrame {
         buttonPanel.add(rightButton);
 
         // Add components to the frame
-        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(chartPanel, BorderLayout.CENTER);
-        getContentPane().add(buttonPanel, BorderLayout.SOUTH);
-
-        setLocationRelativeTo(null);
-        setVisible(true);
-
+        setLayout(new BorderLayout());
+        add(chartPanel, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
     }
 
     private void displayChart(JFreeChart chart) {

@@ -45,12 +45,6 @@ public class CustomersView
     }
 
 
-    // displays search result
-    public void displaySearchResult(List<Customer> customers)
-    {
-        displayCustomers(customers);
-    }
-
 
 
     public void displayCustomers(List<Customer> customers) {

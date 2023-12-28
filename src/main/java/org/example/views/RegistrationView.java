@@ -28,7 +28,7 @@ public class RegistrationView extends BetterFrame {
         addPasswordFieldWithLabel("Confirm Password:", confirmPasswordField = new BetterPasswordField(), panel);
 
         // Role selection
-        panel.add(new JLabel("Role:"));
+        panel.add(new BetterLabel("Role:"));
         String[] roles = {"Admin", "Manager", "Staff"};
         roleComboBox = new BetterComboBox<>(roles);
         panel.add(roleComboBox);
@@ -105,13 +105,13 @@ public class RegistrationView extends BetterFrame {
     }
 
     private void addTextFieldWithLabel(String labelText, BetterTextField textField, JPanel panel) {
-        JLabel label = new JLabel(labelText);
+        JLabel label = new BetterLabel(labelText);
         panel.add(label);
         panel.add(textField);
     }
 
     private void addPasswordFieldWithLabel(String labelText, BetterPasswordField passwordField, JPanel panel) {
-        JLabel label = new JLabel(labelText);
+        JLabel label = new BetterLabel(labelText);
         panel.add(label);
         panel.add(passwordField);
     }

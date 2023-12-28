@@ -12,6 +12,8 @@ public class NavBar extends JPanel {
     private String[] pageOptions = {"Inventory", "Customers", "Suppliers", "Purchases", "Transactions", "Users"};
     private BetterButton charts = new BetterButton("Charts");
 
+    private BetterButton resizeButton = new BetterButton("Resize");
+
     public NavBar() {
         initComponents();
     }
@@ -73,8 +75,20 @@ public class NavBar extends JPanel {
         gbc.insets = new Insets(5, 0, 5, 10); // Adjust spacing
         add(charts, gbc);
 
+
+        // Adding the Resize Button
+        gbc.gridx = 3; // Adjust column index
+        gbc.gridy = 0;
+        gbc.weightx = 0.1;
+        gbc.insets = new Insets(5, 0, 5, 10); // Adjust spacing
+        add(resizeButton, gbc);
+
     }
 
+
+    public BetterButton getResizeButton() {
+        return resizeButton;
+    }
     public JTextField getSearchField() {
         return searchField;
     }

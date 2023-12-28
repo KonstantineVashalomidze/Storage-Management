@@ -44,7 +44,6 @@ public class InventoryView extends BetterFrame {
         var navBar = new NavBar();
         var navBarController = new NavBarController(navBar, this);
 
-
         // Initialize main panel and layout
         mainPanel = new JPanel(new BorderLayout());
         setContentPane(mainPanel);
@@ -60,7 +59,6 @@ public class InventoryView extends BetterFrame {
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
-
 
         setLocationRelativeTo(null);
         setVisible(true);

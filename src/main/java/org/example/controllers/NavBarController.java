@@ -5,6 +5,7 @@ import org.example.services.*;
 import org.example.util.DatabaseUtil;
 import org.example.views.NavBar;
 import org.example.views.*;
+import org.example.views.configurations.JFrameConfigurations;
 import org.example.views.view_components.BetterComboBox;
 
 import javax.swing.*;
@@ -17,6 +18,10 @@ public class NavBarController implements Controller {
     private NavBar navBar;
     private JFrame currentWindow;
 
+    private boolean screenIsFullSized = false;
+
+
+
     public NavBarController(NavBar navBar, JFrame currentWindow) {
         this.navBar = navBar;
         this.currentWindow = currentWindow;
@@ -24,6 +29,7 @@ public class NavBarController implements Controller {
         navBar.getPageDropdown().addActionListener(pageSelectionListener());
         navBar.getSearchField().addActionListener(searchFieldAct());
         navBar.getChartsButton().addActionListener(chartsButtonListener());
+        navBar.getResizeButton().addActionListener(resizeButtonListener());
     }
 
     private ActionListener searchFieldAct() {
@@ -61,20 +67,46 @@ public class NavBarController implements Controller {
     }
 
 
+    private ActionListener resizeButtonListener()
+    {
+        return e ->
+        {
+            validateResizing();
+            screenIsFullSized = !screenIsFullSized;
+        };
+    }
+
+    private void validateResizing()
+    {
+        if (!screenIsFullSized)
+        {
+            JFrameConfigurations.makeFullScreen(currentWindow);
+        }
+        else
+        {
+            JFrameConfigurations.makeDefaultScreen(currentWindow);
+        }
+    }
+
+
     private ActionListener pageSelectionListener() {
         return e -> {
             BetterComboBox<String> cb = (BetterComboBox<String>) e.getSource();
             String selectedPage = (String) cb.getSelectedItem();
             switch (Objects.requireNonNull(selectedPage)) {
-                case "Inventory" -> openInventoryView();
+                case "Inventory" -> {
+                    openInventoryView();
+                }
                 case "Customers" -> openCustomersView();
                 case "Suppliers" -> openSuppliersView();
                 case "Purchases" -> openPurchasesView();
                 case "Transactions" -> openTransactionsView();
                 case "Users" -> openUsersView();
-                default -> {
+                default ->
+                {
+                    // Handle default case or error
                 }
-                // Handle default case or error
+
             }
         };
     }

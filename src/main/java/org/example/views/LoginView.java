@@ -1,6 +1,7 @@
 package org.example.views;
 
 import org.example.views.view_components.BetterButton;
+import org.example.views.view_components.BetterLabel;
 import org.example.views.view_components.BetterPasswordField;
 import org.example.views.view_components.BetterTextField;
 
@@ -24,13 +25,13 @@ public class LoginView extends JFrame {
         panel.setLayout(new GridLayout(4, 2, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        JLabel usernameLabel = new JLabel("Username:");
+        BetterLabel usernameLabel = new BetterLabel("Username:");
         panel.add(usernameLabel);
 
         usernameField = new BetterTextField();
         panel.add(usernameField);
 
-        JLabel passwordLabel = new JLabel("Password:");
+        BetterLabel passwordLabel = new BetterLabel("Password:");
         panel.add(passwordLabel);
 
         passwordField = new BetterPasswordField();

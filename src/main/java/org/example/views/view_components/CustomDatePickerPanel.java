@@ -12,9 +12,13 @@ public class CustomDatePickerPanel extends JPanel {
     private final BetterLabel selectedDateLabel;
     private final JPanel calendarPanel;
     private LocalDate selectedDate;
+    private boolean isFrom = true;
 
-    public CustomDatePickerPanel() {
+    private DisplaysDate displaysDate;
+
+    public CustomDatePickerPanel(DisplaysDate displaysDate) {
         setLayout(new BorderLayout());
+        this.displaysDate = displaysDate;
 
         selectedDate = LocalDate.now();
 
@@ -24,25 +28,31 @@ public class CustomDatePickerPanel extends JPanel {
 
         JPanel controlPanel = new JPanel(new FlowLayout());
 
+        Dimension arrowButtonDimension = new Dimension(60, 30);
+
         BetterButton prevYearButton = new BetterButton("<<");
+        prevYearButton.setPreferredSize(arrowButtonDimension);
         prevYearButton.addActionListener(e -> {
             updateCalendar(-1, 0);
             displayCurrentYear();
         });
 
         BetterButton prevMonthButton = new BetterButton("<");
+        prevMonthButton.setPreferredSize(arrowButtonDimension);
         prevMonthButton.addActionListener(e -> {
             updateCalendar(0, -1);
             displayCurrentYear();
         });
 
         BetterButton nextMonthButton = new BetterButton(">");
+        nextMonthButton.setPreferredSize(arrowButtonDimension);
         nextMonthButton.addActionListener(e -> {
             updateCalendar(0, 1);
             displayCurrentYear();
         });
 
         BetterButton nextYearButton = new BetterButton(">>");
+        nextYearButton.setPreferredSize(arrowButtonDimension);
         nextYearButton.addActionListener(e -> {
             updateCalendar(1, 0);
             displayCurrentYear();
@@ -83,10 +93,28 @@ public class CustomDatePickerPanel extends JPanel {
 
         for (int i = 1; i <= daysInMonth; i++) {
             BetterButton dayButton = new BetterButton(String.valueOf(i));
+            dayButton.setPreferredSize(new Dimension(50, 10));
             int day = i;
             dayButton.addActionListener(e -> {
                 selectedDate = LocalDate.of(selectedDate.getYear(), selectedDate.getMonth(), day);
                 displayCurrentYear();
+                var parent = getParent();
+                if (parent != null)
+                {
+                    parent.remove(this);
+                    parent.revalidate();
+                    parent.repaint();
+                    if (isFrom)
+                    {
+                        displaysDate.displayDateFrom(selectedDate);
+                        isFrom = false;
+                    }
+                    else
+                    {
+                        displaysDate.displayDateTo(selectedDate);
+                        isFrom = true;
+                    }
+                }
             });
             calendarPanel.add(dayButton);
         }
@@ -97,9 +125,6 @@ public class CustomDatePickerPanel extends JPanel {
 
     private void displayCurrentYear()
     {
-        selectedDateLabel.setText(("" + selectedDate).substring(0, 4));
+        selectedDateLabel.setText(("" + selectedDate).substring(0, 7));
     }
-
-
-
 }

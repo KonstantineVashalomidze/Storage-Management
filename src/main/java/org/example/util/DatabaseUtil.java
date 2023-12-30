@@ -9,9 +9,7 @@ import org.neo4j.driver.util.Pair;
 
 import java.sql.Array;
 import java.time.LocalDate;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class DatabaseUtil {
 
@@ -573,27 +571,20 @@ public class DatabaseUtil {
 
 
 
-    public double totalSalesOverTime(String startingDate, String endingDate) {
-        double totalSales = 0.0;
-        try (Session session = getSession()) {
-            String query = "MATCH (t:Transaction) WHERE t.date >= $startingDate AND t.date <= $endingDate RETURN SUM(toInteger(t.totalCost)) AS totalSales";
-            Result result = session.run(query, Values.parameters("startingDate", startingDate, "endingDate", endingDate));
-            if (result.hasNext()) {
-                totalSales = result.next().get("totalSales").asDouble();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return totalSales;
-    }
-
-
-
-    public List<AbstractMap.SimpleEntry<String, Double>> totalSalesPerMonth() {
+    public List<AbstractMap.SimpleEntry<String, Double>> totalSalesPerMonth(String startDate, String endDate) {
         List<AbstractMap.SimpleEntry<String, Double>> salesPerMonth = new ArrayList<>();
         try (Session session = getSession()) {
-            String query = "MATCH (t:Transaction) WITH t.date AS DateString, toFloat(t.totalCost) AS Quantity RETURN SUBSTRING(DateString, 0, 7) AS Month, SUM(Quantity) AS TotalSales ORDER BY Month";
-            Result result = session.run(query);
+            String query = "MATCH (t:Transaction) " +
+                    "WHERE t.date >= $startDate AND t.date <= $endDate " +
+                    "WITH t.date AS DateString, toFloat(t.totalCost) AS Quantity " +
+                    "RETURN SUBSTRING(DateString, 0, 7) AS Month, SUM(Quantity) AS TotalSales " +
+                    "ORDER BY Month";
+
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("startDate", startDate);
+            parameters.put("endDate", endDate);
+
+            Result result = session.run(query, parameters);
             while (result.hasNext()) {
                 Record record = result.next();
                 salesPerMonth.add(new AbstractMap.SimpleEntry<>(record.get("Month").asString(), record.get("TotalSales").asDouble()));
@@ -603,6 +594,7 @@ public class DatabaseUtil {
         }
         return salesPerMonth;
     }
+
 
     public List<AbstractMap.SimpleEntry<String, Double>> bestSellingProductsByUnitsSold() {
         List<AbstractMap.SimpleEntry<String, Double>> bestSellingProducts = new ArrayList<>();

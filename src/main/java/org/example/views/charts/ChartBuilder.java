@@ -16,14 +16,12 @@ import org.jfree.data.general.DefaultPieDataset;
 
 import java.awt.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.AbstractMap;
 import java.util.List;
 
 public class ChartBuilder
 {
-
-
-
 
     public static JFreeChart averageDeliveryTimeHistogram()
     {
@@ -100,8 +98,8 @@ public class ChartBuilder
     }
 
 
-    public static JFreeChart monthlySalesChart() {
-        List<AbstractMap.SimpleEntry<String, Double>> salesData = DatabaseUtil.getInstance().totalSalesPerMonth();
+    public static JFreeChart monthlySalesChart(LocalDate startDate, LocalDate endDate) {
+        List<AbstractMap.SimpleEntry<String, Double>> salesData = DatabaseUtil.getInstance().totalSalesPerMonth(startDate+"", endDate+"");
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 

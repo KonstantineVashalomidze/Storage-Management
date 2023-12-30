@@ -646,6 +646,31 @@ public class DatabaseUtil {
     }
 
 
+    // Function to execute the Cypher query and retrieve product information
+    public List<List<String>> getProductStockInfo() {
+        List<List<String>> productStockInfo = new ArrayList<>();
+        try (Session session = driver.session()) {
+            String query = "MATCH (p:Product) RETURN p.productID AS ProductID, p.stockQuantity AS StockQuantity, p.minimumStockLevel AS MinimumStockLevel LIMIT 20";
+            Result result = session.run(query);
+            while (result.hasNext()) {
+                Record record = result.next();
+                productStockInfo.add(List.of(record.get("ProductID").asString(), record.get("StockQuantity").asString(), record.get("MinimumStockLevel").asString()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return productStockInfo;
+    }
+
+
+    public static void main(String[] args) {
+
+    }
+
+
+
 
 
 

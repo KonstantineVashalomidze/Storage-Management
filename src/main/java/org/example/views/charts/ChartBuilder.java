@@ -19,9 +19,52 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.AbstractMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChartBuilder
 {
+
+
+    public static JFreeChart currentStockQuantityVSMinimalStockQuantity() {
+        // Fetch data from the database
+        List<List<String>> data = DatabaseUtil.getInstance().getProductStockInfo();
+
+        // Create a dataset to hold the data for the chart
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+        // Assuming the data contains columns for current stock quantity and minimal stock quantity
+        for (List<String> row : data) {
+            String productId = row.get(0); // Assuming the product name is in the first column
+            int currentStock = Integer.parseInt(row.get(1)); // Assuming current stock is in the second column
+            int minimalStock = Integer.parseInt(row.get(2)); // Assuming minimal stock is in the third column
+
+            // Add data to the dataset
+            dataset.addValue(currentStock, "Current Stock", productId);
+            dataset.addValue(minimalStock, "Minimal Stock", productId);
+        }
+
+        // Create the area chart using ChartFactory
+        JFreeChart chart = ChartFactory.createAreaChart(
+                "Current Stock Quantity vs Minimal Stock Quantity", // Chart title
+                "Product ID Number", // X-axis label
+                "Stock Quantity", // Y-axis label
+                dataset, // Dataset
+                PlotOrientation.VERTICAL,
+                true,
+                true,
+                false
+        );
+
+        // get a reference to the plot for further customisation...
+        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+
+        CategoryAxis domainAxis = plot.getDomainAxis();
+        domainAxis.setCategoryLabelPositions(
+                CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 2.0));
+
+        return chart;
+    }
+
 
     public static JFreeChart averageDeliveryTimeHistogram()
     {

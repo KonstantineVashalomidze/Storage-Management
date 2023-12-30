@@ -35,7 +35,8 @@ public class ChartSelectionView extends JPanel implements DisplaysDate {
                 ChartBuilder.monthlySalesChart(salesFromDate, salesUpToDate),
                 ChartBuilder.bestSellingProductsByUnitsSoldChart(),
                 ChartBuilder.bestProfitableProductsPieChart(),
-                ChartBuilder.averageDeliveryTimeHistogram()
+                ChartBuilder.averageDeliveryTimeHistogram(),
+                ChartBuilder.currentStockQuantityVSMinimalStockQuantity()
         };
 
         // Add buttons to a panel
@@ -82,7 +83,7 @@ public class ChartSelectionView extends JPanel implements DisplaysDate {
 
     private void displayChart(JFreeChart chart) {
         // Display the chart on the chart panel
-        ChartPanel chartPanel = new ChartPanel(chart);
+        ChartPanel newChartPanel = new ChartPanel(chart);
 
         if (currentChartIndex == 0) {
             if (buttonPanel.getComponents().length != 0) {
@@ -92,29 +93,36 @@ public class ChartSelectionView extends JPanel implements DisplaysDate {
             datePickerButton.addActionListener((e) -> {
                 // Show datePicker object on top of this panel relatively to this from button
                 Point buttonLocation = datePickerButton.getLocation();
-                Point panelLocation = chartPanel.getLocation();
+                Point panelLocation = newChartPanel.getLocation();
                 int x = buttonLocation.x - panelLocation.x;
                 int y = buttonLocation.y - panelLocation.y + datePickerButton.getHeight();
 
                 // Add datePicker to the chart panel
-                chartPanel.add(datePicker);
-                chartPanel.setComponentZOrder(datePicker, 0);
-                datePicker.setLocation(x, y);
-                callRevalidateRepaint(this);
+                newChartPanel.add(datePicker);
+                newChartPanel.setComponentZOrder(datePicker, 0);
+                newChartPanel.setLocation(x, y);
+                revalidate();
+                repaint();
             });
-        } else {
+        }
+        else
+        {
             buttonPanel.remove(datePickerButton);
+            buttonPanel.revalidate();
+            buttonPanel.repaint();
         }
 
-        chartPanel.setPreferredSize(new Dimension(500, 300));
-        chartPanel.setDomainZoomable(true);
-        chartPanel.setRangeZoomable(true);
+        newChartPanel.setPreferredSize(new Dimension(500, 300));
+        newChartPanel.setDomainZoomable(true);
+        newChartPanel.setRangeZoomable(true);
 
-        callRevalidateRepaint(buttonPanel);
+        buttonPanel.revalidate();
+        buttonPanel.repaint();
 
         this.chartPanel.removeAll();
-        this.chartPanel.add(chartPanel, BorderLayout.CENTER);
-        callRevalidateRepaint(this.chartPanel);
+        this.chartPanel.add(newChartPanel, BorderLayout.CENTER);
+        this.chartPanel.revalidate();
+        this.chartPanel.repaint();
     }
 
     private void showNextChart() {
@@ -125,12 +133,6 @@ public class ChartSelectionView extends JPanel implements DisplaysDate {
     private void showPreviousChart() {
         currentChartIndex = (currentChartIndex - 1 + charts.length) % charts.length;
         displayChart(charts[currentChartIndex]);
-    }
-
-    public void callRevalidateRepaint(JComponent component)
-    {
-        component.revalidate();
-        component.revalidate();
     }
 
     @Override

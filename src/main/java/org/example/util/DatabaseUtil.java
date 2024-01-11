@@ -7,9 +7,12 @@ import org.neo4j.driver.Record;
 import org.neo4j.driver.types.Node;
 import org.neo4j.driver.util.Pair;
 
+import javax.swing.*;
+import java.awt.*;
 import java.sql.Array;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.List;
 
 public class DatabaseUtil {
 
@@ -290,12 +293,12 @@ public class DatabaseUtil {
                 Record record = result.next();
 
                 // Extract properties from the record
-                String transactionID = record.get("transactionId").asString();
-                String date = record.get("date").asString();
-                String totalCost = record.get("totalCost").asString();
-                String customerID = record.get("customerID").asString();
-                String productID = record.get("productID").asString();
-                String discountsApplied = record.get("discountsApplied").asString();
+                String transactionID =      record.get("transactionId").asString();
+                String date =               record.get("date").asString();
+                String totalCost =          record.get("totalCost").asString();
+                String customerID =         record.get("customerID").asString();
+                String productID =          record.get("productID").asString();
+                String discountsApplied =   record.get("discountsApplied").asString();
 
 
 
@@ -649,7 +652,7 @@ public class DatabaseUtil {
     // Function to execute the Cypher query and retrieve product information
     public List<List<String>> getProductStockInfo() {
         List<List<String>> productStockInfo = new ArrayList<>();
-        try (Session session = driver.session()) {
+        try (Session session = getSession()) {
             String query = "MATCH (p:Product) RETURN p.productID AS ProductID, p.stockQuantity AS StockQuantity, p.minimumStockLevel AS MinimumStockLevel LIMIT 20";
             Result result = session.run(query);
             while (result.hasNext()) {
@@ -665,10 +668,23 @@ public class DatabaseUtil {
     }
 
 
-    public static void main(String[] args) {
 
+    public List<Record> retrieveGraph() {
+        List<Record> records;
+        try (Session session = getSession()) {
+            String cypherQuery = "MATCH (c:Customer)<-[e1:MADE_PURCHASE]-(t:Transaction)-[e2:OF_PRODUCT]->(p:Product)<-[e3:THE_PRODUCT]-(pr:Purchase)-[e4:FROM_SUPPLIER]->(s:Supplier), (pr)-[e5:MADE_BY_USER]->(u:User) RETURN c, t, p, pr, s, u, e1, e2, e3, e4, e5 LIMIT 10";
+            Result result = session.run(cypherQuery);
+            records = new ArrayList<>();
+
+
+            while (result.hasNext()) {
+                Record record = result.next();
+
+                records.add(record);
+            }
+        }
+        return records;
     }
-
 
 
 

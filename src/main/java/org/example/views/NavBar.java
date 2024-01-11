@@ -9,7 +9,7 @@ import java.awt.*;
 public class NavBar extends JPanel {
     private JTextField searchField = new JTextField("Search");
     private BetterComboBox<String> pageDropdown = new BetterComboBox<>();
-    private String[] pageOptions = {"Inventory", "Customers", "Suppliers", "Purchases", "Transactions", "Users"};
+    private String[] pageOptions = {"Inventory", "Customers", "Suppliers", "Purchases", "Transactions", "Users", "GraphVisualization"};
     private BetterButton charts = new BetterButton("Charts");
 
     private BetterButton resizeButton = new BetterButton("Resize");

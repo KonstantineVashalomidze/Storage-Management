@@ -2,7 +2,7 @@ package org.example.models;
 
 import java.util.Date;
 
-public class Product {
+public class Product implements Model {
     private String productName;
     private String category;
     private String sellingPrice;

@@ -18,7 +18,7 @@ import java.util.Objects;
 public class NavBarController implements Controller {
     private NavBar navBar;
     private MainWindow mainWindow;
-    // inventoryController, customersController, suppliersController, purchasesController, transactionsController, usersController
+    // inventoryController, customersController, suppliersController, purchasesController, transactionsController, usersController, GraphVisualization
     private List<Controller> pageControllers;
 
     private ChartSelectionView chartSelectionView;
@@ -27,6 +27,8 @@ public class NavBarController implements Controller {
 
     // indicates if the window is full screen
     boolean isFullScreen = false;
+
+
 
 
 
@@ -130,6 +132,10 @@ public class NavBarController implements Controller {
         var usersService = new UsersService();
         var usersController = new UsersController(usersView, usersService);
 
+        // create graph visualization
+        var dataForGraph = DatabaseUtil.getInstance().retrieveGraph();
+        var graphVisualization = new GraphVisualization(dataForGraph);
+
         // create charts page
         chartSelectionView = new ChartSelectionView();
 
@@ -139,7 +145,9 @@ public class NavBarController implements Controller {
                 suppliersController,
                 purchasesController,
                 transactionsController,
-                usersController);
+                usersController,
+                graphVisualization
+                );
     }
 
 
@@ -171,6 +179,7 @@ public class NavBarController implements Controller {
                 case "Purchases" -> openPurchasesView();
                 case "Transactions" -> openTransactionsView();
                 case "Users" -> openUsersView();
+                case "GraphVisualization" -> openGraphVisualization();
                 default ->
                 {
                     // Handle default case or error
@@ -194,6 +203,15 @@ public class NavBarController implements Controller {
         if (!currentPage.getClass().getSimpleName().equals("CustomersView")) {
             currentPage = ((CustomersController) pageControllers.get(1)).getCustomersView();
             mainWindow.setWindowTitle("Customer Management");
+            mainWindow.setCurrentPage(currentPage);
+        }
+    }
+
+    private void openGraphVisualization()
+    {
+        if (!currentPage.getClass().getSimpleName().equals("GraphVisualization")) {
+            currentPage = ((GraphVisualization) pageControllers.get(6));
+            mainWindow.setWindowTitle("Graph Visualization");
             mainWindow.setCurrentPage(currentPage);
         }
     }

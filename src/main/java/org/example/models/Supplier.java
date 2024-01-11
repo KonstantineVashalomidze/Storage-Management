@@ -1,6 +1,6 @@
 package org.example.models;
 
-public class Supplier {
+public class Supplier implements Model {
     private String supplierID;
     private String supplierName;
     private String contactInformation;

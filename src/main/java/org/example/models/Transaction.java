@@ -1,6 +1,6 @@
 package org.example.models;
 
-public class Transaction {
+public class Transaction implements Model {
     private String transactionID;
     private String date;
     private String totalCost;

@@ -75,9 +75,6 @@ public class ChartSelectionView extends JPanel implements DisplaysDate {
         add(buttonPanel, BorderLayout.SOUTH);
 
 
-
-
-
     }
 
 

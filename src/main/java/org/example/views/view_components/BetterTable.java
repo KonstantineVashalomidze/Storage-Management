@@ -7,8 +7,27 @@ import java.awt.*;
 
 public class BetterTable extends JTable {
 
+
+    private final Object[][] data;
+    private final String[] columnNames;
+
+    public BetterTable()
+    {
+        super();
+        data = null;
+        columnNames = null;
+        addStyle();
+    }
+
     public BetterTable(Object[][] data, String[] columnNames) {
         super(data, columnNames);
+        this.data = data;
+        this.columnNames = columnNames;
+        addStyle();
+    }
+
+    private void addStyle()
+    {
         // Create a DefaultTableModel and set data and column names
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         setModel(model);
@@ -21,6 +40,7 @@ public class BetterTable extends JTable {
         // Set custom cell renderer for alternating row colors
         setDefaultRenderer(Object.class, new AlternateRowColorRenderer());
     }
+
 
     // Custom cell renderer to set alternating row colors
     static class AlternateRowColorRenderer extends DefaultTableCellRenderer {

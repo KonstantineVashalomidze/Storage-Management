@@ -25,6 +25,12 @@
             <artifactId>jfreechart</artifactId>
             <version>1.0.13</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.vlsi.mxgraph</groupId>
+            <artifactId>jgraphx</artifactId>
+            <version>4.2.2</version>
+        </dependency>
+
     </dependencies>
     <!--    <parent>...</parent>-->
     <!--    <dependencyManagement>...</dependencyManagement>-->

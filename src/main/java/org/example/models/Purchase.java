@@ -1,6 +1,6 @@
 package org.example.models;
 
-public class Purchase {
+public class Purchase implements Model {
     private String purchaseID;
     private String purchaseDate;
     private String deliveryDate;

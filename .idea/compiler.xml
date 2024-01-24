@@ -9,8 +9,5 @@
         <module name="numerical-methods" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="StorageManagement" target="18" />
-    </bytecodeTargetLevel>
   </component>
 </project>
